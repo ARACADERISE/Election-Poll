@@ -8,7 +8,7 @@ def _home_():
     return render_template('index.html', TITLE = "Election Poll App, 2020", INFORMATION = "Yes, the one poll election app!")
 
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
-@app.route('/<ideal>', METHODS = ['POST','GET'])
+@app.route('/<ideal>', methods = ['POST','GET'])
 def _figure_it_out_(ideal):
 
     if ideal == "homepage":
