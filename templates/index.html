@@ -7,5 +7,9 @@
 {% endblock %}
     <body>
         <h1>{{ INFORMATION }}</h1>
+
+        {% if error %}
+        <p> {{ error }}</p>
+        {% endif %}
     </body>
 </html>
