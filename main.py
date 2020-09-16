@@ -14,7 +14,7 @@ def _figure_it_out_(ideal):
     if ideal == "homepage":
         return redirect(url_for('_home_'))
     else:
-        return render_template('error.html', ErrTitle = "URL Not Found", Information = "The URL %s does not exists :(" % ideal)
+        return render_template('error.html', ErrTitle = "URL Not Found", information = "The URL %s does not exists :(" % ideal)
 
 if __name__ == '__main__':
     app.run(debug = True, port = 18080, host = '127.0.0.1')
