@@ -5,9 +5,9 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/PollHomepage')
 def _home_():
-    return render_template('index.html', TITLE = "Election Poll App, 2020")
+    return render_template('index.html', TITLE = "Election Poll App, 2020", INFORMATION = "Yes, the one poll election app!")
 
-@app.route('/<ideal>')
+@app.route('/set/<ideal>')
 def _figure_it_out_(ideal):
 
     if ideal == "all_polls":
