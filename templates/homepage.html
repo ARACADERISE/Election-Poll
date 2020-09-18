@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html>
-{% block content %}
     <head>
         <title>{{ TITLE }}</title>
+        <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='index.css')}}"/>
     </head>
-{% endblock %}
     <body>
         <h1>{{ INFORMATION }}</h1>
-
-        {% if error %}
-        <p> {{ error }}</p>
-        {% endif %}
     </body>
 </html>

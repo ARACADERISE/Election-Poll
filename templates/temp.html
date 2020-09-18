@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Election Poll, 2020!</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cousine:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='temp.css') }}">
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{%endblock%}
+
+        <h1>{{ WELCOME_MSG }}</h1>
+
+        <form action="{{ url_for('_home_') }}">
+            <button id="first_button" type="submit">Continue Here</button>
+        </form>
+    </body>
+</html>

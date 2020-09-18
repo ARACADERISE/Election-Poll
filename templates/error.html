@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
-    {% block content %}{%endblock%}
+    <head>
+        <title>{{ ErrTitle }}</title>
+    </head>
     <body>
         <h1>{{ErrTitle}}</h1>
+        {% if information %}
         <p>{{information}}</p>
+        {% else %}
+        <p>The URL you requested for does not exist</p>
+        {% endif %}
 
-        <button><a href='{{url_for("_home_")}}'>Go Back</a></button>
+        <button><a href='{{url_for("_home_")}}' style="text-decoratione:None;color:white">Go Back</a></button>
     </body>
 </html>

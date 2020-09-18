@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#first_button {
+    padding: 16px 22px;
+    color: white;
+    background-color: black;
+    display: inline-block;
+    border: none;
+}
+#first_button:hover {
+    background-color: white;
+    transition: .6s ease-in;
+    cursor: pointer;
+    border: none;
+}
