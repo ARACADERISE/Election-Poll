@@ -1,0 +1,27 @@
+Casted Struct Item Name: PrintAllItems
+Casted Struct Item PrintAllItems Value/Info: 
+	Printing all Struct items
+
+Casted Struct Item Name: PrintingStructItem
+Casted Struct Item PrintingStructItem Value/Info: 
+	Printing the struct item
+
+Casted Struct Item Name: NewStructItemInformation
+Casted Struct Item NewStructItemInformation Value/Info: 
+	Adding struct item value/information
+
+Casted Struct Item Name: StructAppend
+Casted Struct Item StructAppend Value/Info: 
+	Appending one struct to another
+
+Casted Struct Item Name: NewStructItem
+Casted Struct Item NewStructItem Value/Info: 
+	Adding new Struct item
+
+Casted Struct Item Name: StructUpdateStructItemInfo
+Casted Struct Item StructUpdateStructItemInfo Value/Info: 
+	Updating struct item information/value
+
+Casted Struct Item Name: StructUpdateStructName
+Casted Struct Item StructUpdateStructName Value/Info: 
+	Updating struct name

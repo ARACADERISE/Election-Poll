@@ -1,5 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, request
 import os, json
+from PythonStructs.main import CreateStruct
+from PythonStructs.PythonStructAutomations._automations_ import StructConnect, EntitleDb
+
+# This is a library I developed to make working with data easier!
+StructDb = CreateStruct([])
+StructDb._save_()
+StructDb_DB = StructConnect('information.json')
+StructDb_DB = EntitleDb(StructDb_DB,StructDb_DB._file_name_())
 
 app = Flask(__name__)
 
@@ -7,14 +15,8 @@ loggin = None
 signup = None
 
 """
-
-    To keep everything simple with templates(or blocks), lets just not do it!
-
-    It is way too confusing tbh. I have never used them. I have only ever used shortcuts.
-
-    To me, templates will get into too much of a hassle and will end up screwing up the .html files(by using mutliple different properties from each file)
-
-    To, to prevent the errors of extending files and using block content from different html files, lets just write pure html with not template shortcuts
+    @Coder100: I added in our own login/sign up pages.
+    They are fully functional and they actually work!
 """
 @app.route('/')
 def default_render():
