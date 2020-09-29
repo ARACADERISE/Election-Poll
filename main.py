@@ -48,7 +48,7 @@ def _home_():
                     all_.append(i)
 
                 if username_login in all_ and information[username_login] == password_login:
-                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Yes, the one poll election app!")
+                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_login}")
                 else:
                     #username_login = None
                     if username_login in all_:
@@ -74,7 +74,7 @@ def _home_():
                     ))
                     file.close()
                 
-                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Yes, the one poll election app!")
+                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
             if os.path.isfile('user_info.json'):
                 information = json.loads(open('user_info.json','r').read())
 
@@ -92,7 +92,7 @@ def _home_():
                     ))
                     file.close()
                 
-                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Yes, the one poll election app!")
+                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
     except:pass
 
     return render_template('error.html', information = "An error has occured.")

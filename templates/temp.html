@@ -5,6 +5,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Cousine:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='temp.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
         {% block head %}{% endblock %}
     </head>
     <body>
@@ -13,16 +14,20 @@
         <div class="center">
             <h1>{{ WELCOME_MSG }}</h1>
 
-            <!-- I am having trouble with the color transition on the button :/ -->
-            <form action="{{ url_for('_login_page_') }}" method="POST">
-                <button class="first_button" type="submit">Login</button>
-            </form>
-            <form action="{{ url_for('_signup_page_') }}" method="POST">
-                <button class="_button" type="submit">Sign Up</button>
-            </form>
+            <div move_down> 
+                <form action="{{ url_for('_login_page_') }}" method="POST">
+                    <button class="first_button" type="submit">Login</button>
+                </form>
+                <form action="{{ url_for('_signup_page_') }}" method="POST">
+                    <button class="_button" type="submit">Sign Up</button>
+                </form>
+                <p style="font-size:12px; margin-top: 15px;">Created and Brought To You By: <a href="https://repl.it/@Coder100" style="color: black;"><b><i>Coder100</i></b></a> & <a href="https://repl.it/@MocaCDeveloper" style="color:black"><b><i>MocaCDeveloper</i></b></a></p>
+            </div>
 
-            <p style="font-size:12px; margin-top: 15px;">Created and Brought To You By: <a href="https://repl.it/@Coder100" style="color: black;"><b><i>Coder100</i></b></a> & <a href="https://repl.it/@MocaCDeveloper" style="color:black"><b><i>MocaCDeveloper</i></b></a></p>
-            <p style="font-size:10px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+            <footer class="bottom">
+                <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+            </footer>
         </div>
+
     </body>
 </html>

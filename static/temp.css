@@ -14,7 +14,7 @@
     transition: background .4s ease-out;
     border-radius: 4px;
     margin-top: 10px;
-    width: 250px;
+    width: 300px;
 }
 
 .first_button:hover {
@@ -33,7 +33,7 @@
     transition: background .4s ease-out;
     border-radius: 4px;
     margin-top: 10px;
-    width: 250px;
+    width: 300px;
 }
 ._button:hover {
     background-color: yellowgreen;
@@ -41,4 +41,17 @@
     border: solid black 1px;
     transition: background .4s ease-out;
     cursor: pointer;
+}
+.bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+}
+[move_down] {
+    margin-top: 50px;
 }
