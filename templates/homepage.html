@@ -6,5 +6,12 @@
     </head>
     <body>
         <h1>{{ INFORMATION }}</h1>
+        <form action="{{ url_for('_homescreen_') }}" method="POST">
+            <button class="Button" type="submit">Log Out</button>
+        </form>
+
+        <footer class="bottom">
+            <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+        </footer>
     </body>
 </html>

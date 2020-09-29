@@ -8,13 +8,16 @@
         <div class="Body">
             <h1>Election Poll: User Signup</h1>
 
-            <form action="{{ url_for('_home_') }}" method="POST">
+            <form action="{{ url_for('_home_') }}" method="POST" move_down>
                 <input class="inp" name="username_signup" placeholder="Username" required></br>
                 <input class="inp" name="password_signup" placeholder="Password" type="password" required></br></br>
                 <button class="Button" type="submit">Sign Up</button></br>
                 <a style="font-size:14px" href="{{ url_for('_login_page_') }}">Log In</a>
-                <p style="font-size:10px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
             </form>
+
+            <footer class="bottom">
+                <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+            </footer>
         </div>
     </body>
 </html>

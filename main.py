@@ -20,6 +20,10 @@ signup = None
 def default_render():
     return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
 
+@app.route('/homescreen', methods = ['POST', 'GET'])
+def _homescreen_():
+    return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
+
 @app.route('/login', methods = ['POST','GET'])
 def _login_page_():
     return render_template('login.html')
