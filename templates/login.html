@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Election Poll Login</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='login.css')}}"/>
+    </head>
+    <body>
+        <div class="head">
+            <h1>Election Poll: User Login Form</h1>
+        </div>
+
+        <div class="LoginInfo">
+            <form action="{{ url_for('_home_') }}" method="POST">
+                <input class="inp" name="username" placeholder="Username" required></br>
+                <input class="inp" name="password" placeholder="Password" type="password" required></br></br>
+                <button class="Button" type="submit">Login</button></br>
+                <p>or</p>
+                <a href="{{ url_for('_signup_page_') }}">Sign Up</a>
+                <p style="font-size:10px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+            </form>
+        </div>
+
+    </body>
+</html>

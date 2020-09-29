@@ -1,6 +1,10 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
+import os, json
 
 app = Flask(__name__)
+
+loggin = None
+signup = None
 
 """
 
@@ -13,13 +17,85 @@ app = Flask(__name__)
     To, to prevent the errors of extending files and using block content from different html files, lets just write pure html with not template shortcuts
 """
 @app.route('/')
-@app.route('/default', methods = ['POST','GET'])
 def default_render():
     return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
 
+@app.route('/login', methods = ['POST','GET'])
+def _login_page_():
+    return render_template('login.html')
+
+@app.route('/signup', methods = ['POST','GET'])
+def _signup_page_():
+    return render_template('signup.html')
+
 @app.route('/homepage',methods = ['POST','GET'])
 def _home_():
-    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = "Yes, the one poll election app!")
+
+    global username_login, username_signup, password_login, password_signup
+
+    try:
+        username_login = request.form['username']
+        password_login = request.form['password']
+
+        if username_login:
+            if not os.path.isfile('user_info.json'):
+                return render_template('error.html', login_redirect = "Username/Password is incorrect")
+            else:
+                information = json.loads(open('user_info.json','r').read())
+
+                all_ = []
+                for i in information:
+                    all_.append(i)
+
+                if username_login in all_ and information[username_login] == password_login:
+                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Yes, the one poll election app!")
+                else:
+                    #username_login = None
+                    if username_login in all_:
+                        return render_template('error.html', login_redirect = "Incorrect password")
+                    else:
+                        return render_template('error.html', login_redirect = "Incorrect Username/password")
+    except: pass
+    
+    try:
+        username_signup = request.form['username_signup']
+        password_signup = request.form['password_signup']
+
+        if username_signup:
+
+            if not os.path.isfile('user_info.json'):
+                information = {username_signup: password_signup}
+
+                with open('user_info.json','w') as file:
+                    file.write(json.dumps(
+                        information,
+                        indent=2,
+                        sort_keys=False
+                    ))
+                    file.close()
+                
+                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Yes, the one poll election app!")
+            if os.path.isfile('user_info.json'):
+                information = json.loads(open('user_info.json','r').read())
+
+                if username_signup in information:
+                    #signup = False
+                    return render_template('error.html', signup_redirect = f"The username {username_signup} already exists")
+
+                information.update({username_signup: password_signup})
+                with open('user_info.json','w') as file:
+
+                    file.write(json.dumps(
+                        information,
+                        indent=2,
+                        sort_keys=False
+                    ))
+                    file.close()
+                
+                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Yes, the one poll election app!")
+    except:pass
+
+    return render_template('error.html', information = "An error has occured.")
 
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
 

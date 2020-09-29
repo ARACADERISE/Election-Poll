@@ -1,0 +1,27 @@
+.ErrorBody {
+    box-align: initial;
+    align-content: center;
+    box-sizing: content-box;
+    align-items: center;
+    text-align: center;
+    margin-top: 200px;
+    padding: 24px 28px;
+    font-family: 'Cousine', monospace;
+    font-size: 26px;
+}
+.BackButton {
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    transition: .6s ease-out;
+    border: none;
+    width: 150px;
+    height: 40px;
+}
+.BackButton:hover {
+    transition: .6s ease-out;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+}

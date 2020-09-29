@@ -10,10 +10,19 @@
     <body>
         {% block body %}{%endblock%}
 
-        <h1>{{ WELCOME_MSG }}</h1>
+        <div class="center">
+            <h1>{{ WELCOME_MSG }}</h1>
 
-        <form action="{{ url_for('_home_') }}">
-            <button id="first_button" type="submit">Continue Here</button>
-        </form>
+            <!-- I am having trouble with the color transition on the button :/ -->
+            <form action="{{ url_for('_login_page_') }}" method="POST">
+                <button class="first_button" type="submit">Login</button>
+            </form>
+            <form action="{{ url_for('_signup_page_') }}" method="POST">
+                <button class="_button" type="submit">Sign Up</button>
+            </form>
+
+            <p style="font-size:12px; margin-top: 15px;">Created and Brought To You By: <a href="https://repl.it/@Coder100" style="color: black;"><b><i>Coder100</i></b></a> & <a href="https://repl.it/@MocaCDeveloper" style="color:black"><b><i>MocaCDeveloper</i></b></a></p>
+            <p style="font-size:10px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+        </div>
     </body>
 </html>

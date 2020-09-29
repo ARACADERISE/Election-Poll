@@ -2,15 +2,36 @@
 <html>
     <head>
         <title>{{ ErrTitle }}</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='error.css') }}"/>
+        <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>{{ErrTitle}}</h1>
-        {% if information %}
-        <p>{{information}}</p>
-        {% else %}
-        <p>The URL you requested for does not exist</p>
-        {% endif %}
-
-        <button><a href='{{url_for("_home_")}}' style="text-decoratione:None;color:white">Go Back</a></button>
+        <div class="ErrorBody">
+            <h1>{{ErrTitle}}</h1>
+            {% if information %}
+            <p>{{information}}</p>
+            <p style="font-size:10px">{{extra}}</p>
+            <form action="{{ url_for('default_render') }}">
+                <button class="BackButton" type="submit">Go To Main Screen</button>
+            </form>
+            {%elif login_redirect %}
+            <p>{{login_redirect}}</p>
+            <form action="{{url_for('_login_page_')}}">
+                <button class="BackButton" type="submit">Go Back</button>
+            </form>
+            <a style="font-size:12px" href="{{ url_for('_signup_page_') }}">Sign Up</a>
+            {%elif signup_redirect%}
+            <p>{{signup_redirect}}</p>
+            <form action="{{url_for('_signup_page_')}}">
+                <button class="BackButton" type="submit">Go Back</button>
+            </form>
+            <a style="font-size:12px" href="{{ url_for('_login_page_') }}">Login</a>
+            {%else%}
+            <p style="font-size:10px">{{extra}}</p>
+            <p>The URL you requested for does not exist</p></br>
+            <p style="font-size:10px">{{extra}}</p>
+            {% endif %}
+            <p style="font-size:10px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+        </div>
     </body>
 </html>

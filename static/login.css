@@ -1,0 +1,37 @@
+.head {
+    box-sizing: content-box;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin-top: 150px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 26px;
+}
+.LoginInfo {
+    box-sizing: content-box;
+    align-content: center;
+    text-align: center;
+    margin-top: 100px;
+}
+.inp {
+    width: 300px;
+    height: 46px;
+    box-align: initial;
+    box-sizing: content-box;
+}
+.Button {
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    transition: .6s ease-out;
+    border: none;
+    width: 300px;
+    height: 40px;
+}
+.Button:hover {
+    transition: .6s ease-out;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+}
