@@ -7,17 +7,21 @@
     </head>
     <body>
         <div class="head">
-            <h1>Election Poll: User Login Form</h1>
-        
+          {%if admin == True%}
+          <h1 style="font-size:40px">ADMIN VIEW</h1>
+          <h1 style="font-size:32px">Election Poll: User Login Form</h1>
+          {%else%}
+          <h1>Election Poll: User Login Form</h1>
+          {%endif%}        
 
-            <div class="LoginInfo">
-                <form action="{{ url_for('_home_') }}" method="POST" move_down>
-                    <input class="inp" name="username" placeholder="Username" required></br>
-                    <input class="inp" name="password" placeholder="Password" type="password" required></br></br>
-                    <button class="Button" type="submit">Login</button></br>
-                    <a style="font-size:12px" href="{{ url_for('_signup_page_') }}">Sign Up</a>
-                </form>
-            </div>
+          <div class="LoginInfo">
+            <form action="{{ url_for('_home_') }}" method="POST" move_down>
+              <input class="inp" name="username" placeholder="Username" required></br>
+              <input class="inp" name="password" placeholder="Password" type="password" required></br></br>
+              <button class="Button" type="submit">Login</button></br>
+              <a style="font-size:12px" href="{{ url_for('_signup_page_') }}">Sign Up</a>
+            </form>
+          </div>
         </div>
 
         <footer class="bottom">

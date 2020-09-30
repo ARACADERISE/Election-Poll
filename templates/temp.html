@@ -12,17 +12,21 @@
         {% block body %}{%endblock%}
 
         <div class="center">
-            <h1 style="font-size:52px; letter-spacing: 6px">{{ WELCOME_MSG }}</h1>
-
-            <div move_down> 
-                <form action="{{ url_for('_login_page_') }}" method="POST">
-                    <button class="first_button space" type="submit">Login</button>
-                </form>
-                <p>or</p>
-                <form action="{{ url_for('_signup_page_') }}" method="POST">
-                    <button class="_button space" type="submit">Sign Up</button>
-                </form>
-                <p style="font-size:12px; margin-top: 15px;">Created and Brought To You By: <a href="https://repl.it/@Coder100" style="color: black;"><b><i>@Coder100</i></b></a> & <a href="https://repl.it/@MocaCDeveloper" style="color:black"><b><i>@MocaCDeveloper</i></b></a></p>
+          {%if admin == True%}
+          <h1 style="font-size:40px; letter-spacing: 8px">ADMIN VIEW</h1>
+          <h2 style="font-size:32px; letter-spacing: 6px">{{ WELCOME_MSG }}</h2>
+          {%else%}
+          <h2 style="font-size:52px; letter-spacing: 6px">{{ WELCOME_MSG }}</h2>
+          {%endif%}
+          <div move_down> 
+            <form action="{{ url_for('_login_page_') }}" method="POST">
+              <button class="first_button space" type="submit">Login</button>
+            </form>
+            <p>or</p>
+            <form action="{{ url_for('_signup_page_') }}" method="POST">
+              <button class="_button space" type="submit">Sign Up</button>
+            </form>
+            <p style="font-size:12px; margin-top: 15px;">Created and Brought To You By: <a href="https://repl.it/@Coder100" style="color: black;"><b><i>@Coder100</i></b></a> & <a href="https://repl.it/@MocaCDeveloper" style="color:black"><b><i>@MocaCDeveloper</i></b></a></p>
             </div>
 
             <footer class="bottom">

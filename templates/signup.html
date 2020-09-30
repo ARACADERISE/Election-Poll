@@ -7,18 +7,22 @@
     </head>
     <body>
         <div class="Body">
-            <h1>Election Poll: User Signup</h1>
+          {%if admin == True%}
+          <h1 style="font-size:40px">ADMIN VIEW</h1>
+          <h1 style="font-size:32px">Election Poll: User Signup</h1>
+          {%else%}
+          <h1 style="font-size:40px">Election Poll: User Signup</h1>
+          {%endif%}
+          <form action="{{ url_for('_home_') }}" method="POST" move_down>
+            <input class="inp" name="username_signup" placeholder="Username" required></br>
+            <input class="inp" name="password_signup" placeholder="Password" type="password" required></br></br>
+            <button class="Button" type="submit">Sign Up</button></br>
+            <a style="font-size:14px" href="{{ url_for('_login_page_') }}">Log In</a>
+          </form>
 
-            <form action="{{ url_for('_home_') }}" method="POST" move_down>
-                <input class="inp" name="username_signup" placeholder="Username" required></br>
-                <input class="inp" name="password_signup" placeholder="Password" type="password" required></br></br>
-                <button class="Button" type="submit">Sign Up</button></br>
-                <a style="font-size:14px" href="{{ url_for('_login_page_') }}">Log In</a>
-            </form>
-
-            <footer class="bottom">
-                <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
-            </footer>
+          <footer class="bottom">
+            <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+          </footer>
         </div>
     </body>
 </html>

@@ -38,6 +38,17 @@ def default_render():
             StructDb._save_()
         return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
+@app.route('/admin/<ideal>', methods = ["POST",'GET'])
+def _ADMIN_(ideal):
+  if ideal == 'home':
+    return render_template('temp.html',WELCOME_MSG = 'Welcome to Election Poll, 2020', admin = True)
+  if ideal == 'login':
+    return render_template('login.html', admin = True)
+  if ideal == 'signup':
+    return render_template('sign_up.html', admin = True)
+  if ideal == 'homepage':
+    return render_template('error.html', information = "Cannot access homepage wihtout logging in")
+
 @app.route('/homescreen', methods = ['POST', 'GET'])
 def _homescreen_():
     if server_shutdown == False:
