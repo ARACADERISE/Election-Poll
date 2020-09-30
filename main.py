@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 loggin = None
 signup = None
+server_shutdown = True
 
 """
     @Coder100: I added in our own login/sign up pages.
@@ -20,7 +21,10 @@ signup = None
 """
 @app.route('/')
 def default_render():
-    return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
+    if server_shutdown == False:
+        return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
+    else:
+        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/homescreen', methods = ['POST', 'GET'])
 def _homescreen_():
