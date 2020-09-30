@@ -6,6 +6,14 @@
     margin-top: 150px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 26px;
+    width: 100%;
+    background-color: white;
+    padding-top: 32px;
+    padding-bottom: 38px;
+}
+body {
+    background-image: url('/static/ForWebsite2.png');
+    background-repeat: no-repeat center;
 }
 .Button {
     background-color: black;
@@ -30,14 +38,13 @@
     box-sizing: content-box;
 }
 [move_down] {
-    margin-top: 100px;
+    margin-top: 60px;
 }
 .bottom {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: white;
     color: black;
     text-align: center;
     font-family: 'Anton', sans-serif;

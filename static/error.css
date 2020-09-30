@@ -15,8 +15,8 @@
     border-radius: 4px;
     transition: .6s ease-out;
     border: none;
-    width: 150px;
-    height: 40px;
+    width: 350px;
+    height: 60px;
 }
 .BackButton:hover {
     transition: .6s ease-out;
@@ -24,4 +24,14 @@
     color: black;
     border: 1px solid black;
     border-radius: 4px;
+}
+.bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
 }

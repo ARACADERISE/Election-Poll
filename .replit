@@ -1,1 +1,9 @@
 run="python main.py"
+# I added in background images
+# each image is different depending on the page
+# Only 3 pages contain an image background:
+# Main Screen
+# Login Screen
+# Sign Up Screen
+# I have a working login/sign up system going on as well
+# No need for the user to be a repl.it user!

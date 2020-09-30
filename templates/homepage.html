@@ -3,11 +3,12 @@
     <head>
         <title>{{ TITLE }}</title>
         <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='index.css')}}"/>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     </head>
     <body>
         <h1>{{ INFORMATION }}</h1>
         <form action="{{ url_for('_homescreen_') }}" method="POST">
-            <button class="Button" type="submit">Log Out</button>
+            <button class="Button" name="logout_" value="logout" type="submit">Log Out</button>
         </form>
 
         <footer class="bottom">

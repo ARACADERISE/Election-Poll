@@ -4,12 +4,13 @@
         <title>{{ ErrTitle }}</title>
         <link rel="stylesheet" href="{{ url_for('static',filename='error.css') }}"/>
         <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="ErrorBody">
             <h1>{{ErrTitle}}</h1>
             {% if information %}
-            <p>{{information}}</p>
+            <p style="letter-spacing:8px">{{information}}</p>
             <p style="font-size:10px">{{extra}}</p>
             <form action="{{ url_for('default_render') }}">
                 <button class="BackButton" type="submit">Go To Main Screen</button>
@@ -31,7 +32,10 @@
             <p>The URL you requested for does not exist</p></br>
             <p style="font-size:10px">{{extra}}</p>
             {% endif %}
-            <p style="font-size:10px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+
+            <footer class="bottom">
+                <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+            </footer>
         </div>
     </body>
 </html>

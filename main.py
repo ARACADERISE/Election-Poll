@@ -4,10 +4,10 @@ from PythonStructs.main import CreateStruct
 from PythonStructs.PythonStructAutomations._automations_ import StructConnect, EntitleDb
 
 # This is a library I developed to make working with data easier!
-StructDb = CreateStruct([])
-StructDb._save_()
-StructDb_DB = StructConnect('information.json')
-StructDb_DB = EntitleDb(StructDb_DB,StructDb_DB._file_name_())
+StructDb = CreateStruct([]) # creates the initial "Struct"
+StructDb._save_() # Saves the current information to a file(which should be nothing)
+StructDb_DB = StructConnect('information.json') # Connects to the file it is saves it
+StructDb_DB = EntitleDb(StructDb_DB,StructDb_DB._file_name_()) # Enables the "database" to write and work with as well as update the information
 
 app = Flask(__name__)
 
@@ -101,7 +101,7 @@ def _home_():
                 return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
     except:pass
 
-    return render_template('error.html', information = "An error has occured.")
+    return render_template('error.html', information = "Cannot access homepage, logged out")
 
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
 

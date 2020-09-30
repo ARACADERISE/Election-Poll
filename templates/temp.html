@@ -12,21 +12,23 @@
         {% block body %}{%endblock%}
 
         <div class="center">
-            <h1>{{ WELCOME_MSG }}</h1>
+            <h1 style="font-size:52px; letter-spacing: 6px">{{ WELCOME_MSG }}</h1>
 
             <div move_down> 
                 <form action="{{ url_for('_login_page_') }}" method="POST">
-                    <button class="first_button" type="submit">Login</button>
+                    <button class="first_button space" type="submit">Login</button>
                 </form>
+                <p>or</p>
                 <form action="{{ url_for('_signup_page_') }}" method="POST">
-                    <button class="_button" type="submit">Sign Up</button>
+                    <button class="_button space" type="submit">Sign Up</button>
                 </form>
-                <p style="font-size:12px; margin-top: 15px;">Created and Brought To You By: <a href="https://repl.it/@Coder100" style="color: black;"><b><i>Coder100</i></b></a> & <a href="https://repl.it/@MocaCDeveloper" style="color:black"><b><i>MocaCDeveloper</i></b></a></p>
+                <p style="font-size:12px; margin-top: 15px;">Created and Brought To You By: <a href="https://repl.it/@Coder100" style="color: black;"><b><i>@Coder100</i></b></a> & <a href="https://repl.it/@MocaCDeveloper" style="color:black"><b><i>@MocaCDeveloper</i></b></a></p>
             </div>
 
             <footer class="bottom">
-                <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
-            </footer>
+                    <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+                </footer>
+
         </div>
 
     </body>

@@ -6,6 +6,14 @@
     margin-top: 150px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 26px;
+    width: 100%;
+    background-color: white;
+    padding-top: 32px;
+    padding-bottom: 24px;
+}
+body {
+    background-image: url('/static/ForWebsite.png');
+    background-repeat: no-repeat center;
 }
 .LoginInfo {
     box-sizing: content-box;
@@ -43,7 +51,6 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: white;
     color: black;
     text-align: center;
     font-family: 'Anton', sans-serif;

@@ -3,25 +3,26 @@
     <head>
         <title>Election Poll Login</title>
         <link rel="stylesheet" href="{{ url_for('static',filename='login.css')}}"/>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="head">
             <h1>Election Poll: User Login Form</h1>
+        
+
+            <div class="LoginInfo">
+                <form action="{{ url_for('_home_') }}" method="POST" move_down>
+                    <input class="inp" name="username" placeholder="Username" required></br>
+                    <input class="inp" name="password" placeholder="Password" type="password" required></br></br>
+                    <button class="Button" type="submit">Login</button></br>
+                    <a style="font-size:12px" href="{{ url_for('_signup_page_') }}">Sign Up</a>
+                </form>
+            </div>
         </div>
 
-        <div class="LoginInfo">
-            <form action="{{ url_for('_home_') }}" method="POST" move_down>
-                <input class="inp" name="username" placeholder="Username" required></br>
-                <input class="inp" name="password" placeholder="Password" type="password" required></br></br>
-                <button class="Button" type="submit">Login</button></br>
-                <p>or</p>
-                <a href="{{ url_for('_signup_page_') }}">Sign Up</a>
-            </form>
-
-            <footer class="bottom">
-                <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
-            </footer>
-        </div>
+        <footer class="bottom">
+            <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+        </footer>
 
     </body>
 </html>

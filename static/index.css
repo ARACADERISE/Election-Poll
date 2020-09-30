@@ -29,3 +29,8 @@ body {
     text-align: center;
     font-family: 'Anton', sans-serif;
 }
+.image_here {
+    background-image: url('./flag.png') no-repeat center;
+    z-index: 1;
+    object-fit: fill;
+}
