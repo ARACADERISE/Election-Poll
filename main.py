@@ -28,7 +28,9 @@ def default_render():
                 al.append(i)
             
             if 'ServerShutdowns' in al:
-                total = op['ServerShutdowns']+1
+                total = op['ServerShutdowns']
+                if isinstance(total,list):
+                  total = total[0]+1
                 StructDb.AddInfo('ServerShutdowns',total)
                 StructDb._save_()
         else:
@@ -38,94 +40,108 @@ def default_render():
 
 @app.route('/homescreen', methods = ['POST', 'GET'])
 def _homescreen_():
-    return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
+    if server_shutdown == False:
+        return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
+    else:
+        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/login', methods = ['POST','GET'])
 def _login_page_():
-    return render_template('login.html')
+    if server_shutdown == False:
+        return render_template('login.html')
+    else:
+        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/signup', methods = ['POST','GET'])
 def _signup_page_():
-    return render_template('signup.html')
+    if server_shutdown == False:
+        return render_template('signup.html')
+    else:
+        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/homepage',methods = ['POST','GET'])
 def _home_():
 
-    global username_login, username_signup, password_login, password_signup
+    if server_shutdown == False:
+        global username_login, username_signup, password_login, password_signup
 
-    try:
-        username_login = request.form['username']
-        password_login = request.form['password']
+        try:
+            username_login = request.form['username']
+            password_login = request.form['password']
 
-        if username_login:
-            if not os.path.isfile('user_info.json'):
-                return render_template('error.html', login_redirect = "Username/Password is incorrect")
-            else:
-                information = json.loads(open('user_info.json','r').read())
-
-                all_ = []
-                for i in information:
-                    all_.append(i)
-
-                if username_login in all_ and information[username_login] == password_login:
-                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_login}")
+            if username_login:
+                if not os.path.isfile('user_info.json'):
+                    return render_template('error.html', login_redirect = "Username/Password is incorrect")
                 else:
-                    #username_login = None
-                    if username_login in all_:
-                        return render_template('error.html', login_redirect = "Incorrect password")
+                    information = json.loads(open('user_info.json','r').read())
+
+                    all_ = []
+                    for i in information:
+                        all_.append(i)
+
+                    if username_login in all_ and information[username_login] == password_login:
+                        return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_login}")
                     else:
-                        return render_template('error.html', login_redirect = "Incorrect Username/password")
-    except: pass
-    
-    try:
-        username_signup = request.form['username_signup']
-        password_signup = request.form['password_signup']
+                        #username_login = None
+                        if username_login in all_:
+                            return render_template('error.html', login_redirect = "Incorrect password")
+                        else:
+                            return render_template('error.html', login_redirect = "Incorrect Username/password")
+        except: pass
+        
+        try:
+            username_signup = request.form['username_signup']
+            password_signup = request.form['password_signup']
 
-        if username_signup:
+            if username_signup:
 
-            if not os.path.isfile('user_info.json'):
-                information = {username_signup: password_signup}
+                if not os.path.isfile('user_info.json'):
+                    information = {username_signup: password_signup}
 
-                with open('user_info.json','w') as file:
-                    file.write(json.dumps(
-                        information,
-                        indent=2,
-                        sort_keys=False
-                    ))
-                    file.close()
-                
-                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
-            if os.path.isfile('user_info.json'):
-                information = json.loads(open('user_info.json','r').read())
+                    with open('user_info.json','w') as file:
+                        file.write(json.dumps(
+                            information,
+                            indent=2,
+                            sort_keys=False
+                        ))
+                        file.close()
+                    
+                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
+                if os.path.isfile('user_info.json'):
+                    information = json.loads(open('user_info.json','r').read())
 
-                if username_signup in information:
-                    #signup = False
-                    return render_template('error.html', signup_redirect = f"The username {username_signup} already exists")
+                    if username_signup in information:
+                        #signup = False
+                        return render_template('error.html', signup_redirect = f"The username {username_signup} already exists")
 
-                information.update({username_signup: password_signup})
-                with open('user_info.json','w') as file:
+                    information.update({username_signup: password_signup})
+                    with open('user_info.json','w') as file:
 
-                    file.write(json.dumps(
-                        information,
-                        indent=2,
-                        sort_keys=False
-                    ))
-                    file.close()
-                
-                return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
-    except:pass
+                        file.write(json.dumps(
+                            information,
+                            indent=2,
+                            sort_keys=False
+                        ))
+                        file.close()
+                    
+                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
+        except:pass
 
-    return render_template('error.html', information = "Cannot access homepage, logged out")
+        return render_template('error.html', information = "Cannot access homepage, logged out")
+    else:
+        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
 
 @app.route('/<ideal>', methods = ['POST','GET'])
 def _figure_it_out_(ideal):
-
-    if ideal == "homepage":
-        return redirect(url_for('_home_'))
+    if server_shutdown == False:
+        if ideal == "homepage":
+            return redirect(url_for('_home_'))
+        else:
+            return render_template('error.html', ErrTitle = "URL Not Found", information = "The URL %s does not exist :(" % ideal, TITLE = "URL Not Found")
     else:
-        return render_template('error.html', ErrTitle = "URL Not Found", information = "The URL %s does not exist :(" % ideal, TITLE = "URL Not Found")
+        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 if __name__ == '__main__':
     app.run(debug = True, port = 8080, host = '0.0.0.0')
