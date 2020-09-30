@@ -4,10 +4,7 @@ from PythonStructs.main import CreateStruct
 from PythonStructs.PythonStructAutomations._automations_ import StructConnect, EntitleDb
 
 # This is a library I developed to make working with data easier!
-StructDb = CreateStruct([]) # creates the initial "Struct"
-StructDb._save_() # Saves the current information to a file(which should be nothing)
-StructDb_DB = StructConnect('information.json') # Connects to the file it is saves it
-StructDb_DB = EntitleDb(StructDb_DB,StructDb_DB._file_name_()) # Enables the "database" to write and work with as well as update the information
+StructDb = CreateStruct(['ServerShutdowns']) # creates the initial "Struct"
 
 app = Flask(__name__)
 
@@ -24,6 +21,19 @@ def default_render():
     if server_shutdown == False:
         return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
     else:
+        if os.path.isfile('information.json'):
+            op = json.loads(open('information.json','r').read())
+            al = []
+            for i in op:
+                al.append(i)
+            
+            if 'ServerShutdowns' in al:
+                total = op['ServerShutdowns']+1
+                StructDb.AddInfo('ServerShutdowns',total)
+                StructDb._save_()
+        else:
+            StructDb.AddInfo('ServerShutdowns',1)
+            StructDb._save_()
         return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/homescreen', methods = ['POST', 'GET'])
