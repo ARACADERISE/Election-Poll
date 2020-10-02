@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 loggin = None
 signup = None
-server_shutdown = True
+server_shutdown = False
 
 """
     @Coder100: I added in our own login/sign up pages.
@@ -72,6 +72,39 @@ def _signup_page_():
         return render_template('signup.html')
     else:
         return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+    
+@app.route('/delete', methods = ['POST','GET'])
+def ADMIN_DELETE():
+    return render_template('login.html', special_admission = True)
+@app.route('/delete_user', methods = ['POST','GET'])
+def ADMIN_DELETE_():
+    admin_login_value = request.form['password']
+    admin_username_value = request.form['username']
+
+    if admin_login_value == 'abcdefg' and admin_username_value == 'WebAdminController':
+        return 'yes'
+    if os.path.isfile('user_info.json'):
+        
+        users = json.loads(open('user_info.json').read())
+
+        all_ = []
+        for i in users:
+            all_.append(i)
+        if user_to_delete in all_:
+            del(users[user_to_delete])
+            users.update({'Deleted':user_to_delete})
+
+            with open('user_info.json','w') as file:
+                file.write(json.dumps(
+                    users,
+                    indent=2,
+                    sort_keys=False
+                ))
+                file.close()
+
+                return '<h1>User deleted</h1>'
+    else:
+        return render_template('error.html', information = 'Deletion failed')
 
 @app.route('/homepage',methods = ['POST','GET'])
 def _home_():
@@ -97,6 +130,9 @@ def _home_():
                         return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_login)
                     else:
                         #username_login = None
+                        if 'Deleted' in information:
+                            if username_login == information['Deleted']:
+                                return render_template('error.html', login_redirect = "You're account was deleted by an admin")
                         if username_login in all_:
                             return render_template('error.html', login_redirect = "Incorrect password")
                         else:
@@ -119,7 +155,6 @@ def _home_():
                             sort_keys=False
                         ))
                         file.close()
-                    
                     return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_signup)
                 if os.path.isfile('user_info.json'):
                     information = json.loads(open('user_info.json','r').read())
