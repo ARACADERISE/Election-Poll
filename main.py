@@ -40,14 +40,17 @@ def default_render():
 
 @app.route('/admin/<ideal>', methods = ["POST",'GET'])
 def _ADMIN_(ideal):
-  if ideal == 'home':
-    return render_template('temp.html',WELCOME_MSG = 'Welcome to Election Poll, 2020', admin = True)
-  if ideal == 'login':
-    return render_template('login.html', admin = True)
-  if ideal == 'signup':
-    return render_template('sign_up.html', admin = True)
-  if ideal == 'homepage':
-    return render_template('error.html', information = "Cannot access homepage wihtout logging in")
+    if ideal == 'home':
+        return render_template('temp.html',WELCOME_MSG = 'Welcome to Election Poll, 2020', admin = True)
+    if ideal == 'login':
+        return render_template('login.html', admin = True)
+    if ideal == 'signup':
+        return render_template('signup.html', admin = True)
+    if ideal == 'homepage':
+        if server_shutdown == True:
+            return render_template('error.html', information = "Cannot access homepage without logging in", additional = "The Server Is Down")
+        else:
+            return render_template('error.html', information = "Cannot access homepage without logging in")
 
 @app.route('/homescreen', methods = ['POST', 'GET'])
 def _homescreen_():
@@ -91,7 +94,7 @@ def _home_():
                         all_.append(i)
 
                     if username_login in all_ and information[username_login] == password_login:
-                        return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_login}")
+                        return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_login)
                     else:
                         #username_login = None
                         if username_login in all_:
@@ -117,7 +120,7 @@ def _home_():
                         ))
                         file.close()
                     
-                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
+                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_signup)
                 if os.path.isfile('user_info.json'):
                     information = json.loads(open('user_info.json','r').read())
 
@@ -135,7 +138,7 @@ def _home_():
                         ))
                         file.close()
                     
-                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", INFORMATION = f"Welcome to the Election Poll App, 2020. We are glad to see you, {username_signup}")
+                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_signup)
         except:pass
 
         return render_template('error.html', information = "Cannot access homepage, logged out")
