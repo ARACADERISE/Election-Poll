@@ -1,23 +1,8 @@
 body {
-    text-align: center;
     font-family: 'Cousine', monospace;
-}
-
-.Button {
+    margin: 0;
     background-color: black;
     color: white;
-    border-radius: 4px;
-    transition: .6s ease-out;
-    border: none;
-    width: 250px;
-    height: 40px;
-}
-.Button:hover {
-    transition: .6s ease-out;
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    border-radius: 4px;
 }
 .bottom {
     position: fixed;
@@ -28,9 +13,83 @@ body {
     color: black;
     text-align: center;
     font-family: 'Anton', sans-serif;
+    border-top: 1px solid black;
 }
 .image_here {
     background-image: url('./flag.png') no-repeat center;
     z-index: 1;
     object-fit: fill;
+}
+.nav {
+  overflow: hidden;
+  background-color: black;
+  border-bottom: 1px solid white;
+}
+.nav a.border-right {
+    border-right: 1px solid white;
+}
+
+.nav a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 28px 34px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.nav a.float-right {
+    float: right;
+    letter-spacing: 2px;
+}
+.nav a.underline_white {
+    text-decoration: underline;
+    text-decoration-color: white;
+    cursor: default;
+}
+.nav a.float-center {
+    float: center;
+    text-align: center;
+    margin-left: 48px;
+    font-size: 10px;
+}
+
+.A:hover {
+  background-color: white;
+  color: black;
+  transition: all .6s ease-out;
+}
+.ProfileInfo {
+    font-size: 24px;
+    padding: 26px 28px;
+    margin: 16px 20px;
+    box-sizing: content-box;
+}
+.large {
+    font-size: 20px;
+    margin-left: 42px;
+}
+.small {
+    font-size: 12px;
+    margin-left: 42px;
+}
+.Button_ {
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    transition: .6s ease-out;
+    border: none;
+    width: 500px;
+    height: 40px;
+    margin-left: 42px;
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+.Button_:hover {
+    letter-spacing: 8px;
+    background-color: black;
+    transition: all .8s ease-out;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    cursor: pointer;
 }
