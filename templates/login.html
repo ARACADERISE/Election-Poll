@@ -11,9 +11,19 @@
           <h1 style="font-size:40px">ADMIN VIEW</h1>
           <h1 style="font-size:32px">Election Poll: User Login Form</h1>
           {%else%}
+          {%if special_admission == True%}
+          <h1>Admin Login</h1>
+          <div class="LoginInfo">
+            <form action="{{ url_for('ADMIN_DELETE_') }}" method="POST" move_down>
+              <input class="inp" name="username" placeholder="Username" required></br>
+              <input class="inp" name="password" placeholder="Password" type="password" required></br></br>
+              <button class="Button" type="submit">Login</button></br>
+              <a style="font-size:12px" href="{{ url_for('_signup_page_') }}">Sign Up</a>
+            </form>
+          </div>
+        </div>
+          {%else%}
           <h1>Election Poll: User Login Form</h1>
-          {%endif%}        
-
           <div class="LoginInfo">
             <form action="{{ url_for('_home_') }}" method="POST" move_down>
               <input class="inp" name="username" placeholder="Username" required></br>
@@ -23,6 +33,8 @@
             </form>
           </div>
         </div>
+          {%endif%}
+          {%endif%}        
 
         <footer class="bottom">
             <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
