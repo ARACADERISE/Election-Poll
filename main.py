@@ -125,6 +125,9 @@ def _home_():
                     all_ = []
                     for i in information:
                         all_.append(i)
+                    
+                    if 'Deleted' in information and username_login == information['Deleted']:
+                        return render_template('error.html', login_redirect = "You're account was deleted by an admin")
 
                     if username_login in all_ and information[username_login] == password_login:
                         return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_login)
@@ -158,6 +161,9 @@ def _home_():
                     return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_signup)
                 if os.path.isfile('user_info.json'):
                     information = json.loads(open('user_info.json','r').read())
+
+                    if 'Deleted' in information and username_signup == information['Deleted']:
+                        return render_template('error.html', login_redirect = "You're account was deleted by an admin")
 
                     if username_signup in information:
                         #signup = False
