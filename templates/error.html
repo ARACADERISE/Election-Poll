@@ -11,6 +11,9 @@
             <h1>{{ErrTitle}}</h1>
             {% if information %}
             <p style="letter-spacing:8px">{{information}}</p>
+            {%if additional%}
+            <p style="font-size: 13px">{{additional}}</p>
+            {%endif%}
             <p style="font-size:10px">{{extra}}</p>
             <form action="{{ url_for('default_render') }}">
                 <button class="BackButton" type="submit">Go To Main Screen</button>
