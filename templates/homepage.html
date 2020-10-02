@@ -6,10 +6,24 @@
         <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>{{ INFORMATION }}</h1>
-        <form action="{{ url_for('_homescreen_') }}" method="POST">
-            <button class="Button" name="logout_" value="logout" type="submit">Log Out</button>
-        </form>
+        
+        <div class="nav">
+            <a class="active border-right">Hello, {{ USERNAME }}!</a>
+            <a class="A border-right">Community</a>
+            <a class="A border-right">Messages</a>
+            <a class="A border-right">Overall Statistics</a>
+            <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
+            <a class="A float-right" href="{{ url_for('_homescreen_') }}">Logout</a>
+        </div>
+
+        <div class="ProfileInfo">
+            <p class="small"><i>DEVELOPERS NOTE: You are automatically logged out when you exit the page</i></br>Make webpage where developers can put notes for users to see</p>
+            <h1>Profile Information</h1>
+            <p class="large information">Logged in as {{ USERNAME }}</p>
+            <form action="/">
+                <button class="Button_">Change Password</button>
+            </form>
+        </div>
 
         <footer class="bottom">
             <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
