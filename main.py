@@ -36,7 +36,11 @@ def default_render():
         else:
             StructDb.AddInfo('ServerShutdowns',1)
             StructDb._save_()
-        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+        try:
+            _user = request.cookies.get('username')
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down', MINI = f'Check back shortly, {_user}')
+        except:
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/admin/<ideal>', methods = ["POST",'GET'])
 def _ADMIN_(ideal):
@@ -57,21 +61,33 @@ def _homescreen_():
     if server_shutdown == False:
         return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
     else:
-        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+        try:
+            _user = request.cookies.get('username')
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down', MINI = f'Check back shortly, {_user}')
+        except:
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/login', methods = ['POST','GET'])
 def _login_page_():
     if server_shutdown == False:
         return render_template('login.html')
     else:
-        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+        try:
+            _user = request.cookies.get('username')
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down', MINI = f'Check back shortly, {_user}')
+        except:
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 @app.route('/signup', methods = ['POST','GET'])
 def _signup_page_():
     if server_shutdown == False:
         return render_template('signup.html')
     else:
-        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+        try:
+            _user = request.cookies.get('username')
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down', MINI = f'Check back shortly, {_user}')
+        except:
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
     
 @app.route('/delete', methods = ['POST','GET'])
 def ADMIN_DELETE():
@@ -231,10 +247,10 @@ def _home_():
             _reason = request.form['reason']
 
             res = make_response(render_template('homepage.html',USERNAME = _user, PERSON = _person, REASON = _reason))
-            res.set_cookie('username',_user,max_age=60*60*24*365*2)
-            res.set_cookie('password',_pass,max_age=60*60*24*365*2)
-            res.set_cookie('person',_person,max_age=60*60*24*365*2)
-            res.set_cookie('reason',_reason,max_age=60*60*24*365*2)
+            res.set_cookie('username',_user,max_age=600*600*240*365*20)
+            res.set_cookie('password',_pass,max_age=600*600*240*365*20)
+            res.set_cookie('person',_person,max_age=600*600*240*365*20)
+            res.set_cookie('reason',_reason,max_age=600*600*240*365*20)
 
             if not os.path.isfile('user_info.json'):
                 info = {_user:{'Password':_pass,'VotesFor':_person,'Reason':_reason}}
@@ -250,7 +266,7 @@ def _home_():
                 info = json.loads(open('user_info.json','r').read())
 
                 if _user in info:
-                    return render_template('error.html', signup_redirect = f'Username {_user} already exists')
+                    return render_template('error.html', signup_redirect = f'Login as {_user} to stayed logged in!')
                 else:
                     info.update({_user:{'Password':_pass,'VotesFor':_person,'Reason':_reason}})
 
@@ -285,9 +301,16 @@ def _home_():
                 _person = request.cookies.get('person')
                 _reason = request.cookies.get('reason')
 
-                return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
+                if _person:
+                    return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
+                else:
+                    return render_template('signup.html')
     else:
-        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+        try:
+            _user = request.cookies.get('username')
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down', MINI = f'Check back shortly, {_user}')
+        except:
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
 
 @app.route('/<ideal>', methods = ['POST','GET'])
@@ -298,7 +321,11 @@ def _figure_it_out_(ideal):
         else:
             return render_template('error.html', ErrTitle = "URL Not Found", information = "The URL %s does not exist :(" % ideal, TITLE = "URL Not Found")
     else:
-        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+        try:
+            _user = request.cookies.get('username')
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down', MINI = f'Check back shortly, {_user}')
+        except:
+            return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 
 if __name__ == '__main__':
     app.run(debug = True, port = 8080, host = '0.0.0.0')
