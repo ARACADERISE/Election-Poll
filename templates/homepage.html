@@ -17,11 +17,20 @@
         </div>
 
         <div class="ProfileInfo">
+
+            <form action="{{url_for('redirect_')}}" method="post">
+                <input class="inp" name="Search_user" placeholder="Search for a user"><button class="Button_" type="submit">Search</button></input></br>
+                {%if err_msg%}
+                <p>{{err_msg}}</p>
+                {%endif%}
+            </form></br>
+
             <p class="small"><i>DEVELOPERS NOTE: You are automatically logged out when you exit the page</i></br>Make webpage where developers can put notes for users to see</p>
             <h1>Profile Information</h1>
-            <p class="large information">Logged in as {{ USERNAME }}</p>
+            <p class="large">You're Voting For For: {{PERSON.upper()}}</p>
+            <p class="large">You're Reasoning: {{REASON}}</p></br>
             <form action="/">
-                <button class="Button_">Change Password</button>
+                <button class="_Button">Change Password</button>
             </form>
         </div>
 
