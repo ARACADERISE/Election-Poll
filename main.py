@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, make_response
 import os, json
 from PythonStructs.main import CreateStruct
 from PythonStructs.PythonStructAutomations._automations_ import StructConnect, EntitleDb
@@ -105,8 +105,39 @@ def ADMIN_DELETE_():
                 return '<h1>User deleted</h1>'
     else:
         return render_template('error.html', information = 'Deletion failed')
+    
+@app.route('/vote_form', methods = ['POST','GET'])
+def _vote_form_():
 
-@app.route('/homepage',methods = ['POST','GET'])
+    try:
+        username = request.form['username']
+
+        return render_template('vote_form.html', MSG = f"Who are YOU voting for, {username}?")
+    except:
+        try:
+            username = request.form['username_signup']
+            
+            return render_template('vote_form.html', MSG = f"Who are YOU voting for, {username}?")
+        except: return redirect(url_for('_home_'))
+
+@app.route('/redirect', methods = ['GET','POST'])
+def redirect_():
+    try:
+        person = request.form['Search_user']
+
+        info = json.loads(open('user_info.json','r').read())
+
+        if person in info:
+            if not person == request.cookies.get('username'):
+                return f'Votes For:{info[person]["VotesFor"]}, Reason: {info[person]["Reason"]}'
+            else:
+                return redirect(url_for('_home_'))
+        else:
+            return render_template('error.html', information = 'User does not exist')
+        
+    except: return 'no'
+
+"""@app.route('/homepage',methods = ['POST','GET'])
 def _home_():
 
     if server_shutdown == False:
@@ -129,8 +160,8 @@ def _home_():
                     if 'Deleted' in information and username_login == information['Deleted']:
                         return render_template('error.html', login_redirect = "You're account was deleted by an admin")
 
-                    if username_login in all_ and information[username_login] == password_login:
-                        return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_login)
+                    if username_login in all_ and information[username_login]['Password'] == password_login:
+                        return render_template('homepage.html', USERNAME = username_login, PERSON = information[username_login]['VotesFor'], REASON = information[username_login]['Reason'])
                     else:
                         #username_login = None
                         if 'Deleted' in information:
@@ -145,11 +176,14 @@ def _home_():
         try:
             username_signup = request.form['username_signup']
             password_signup = request.form['password_signup']
+            person = request.form['person']
+            reason = request.form['reason']
 
             if username_signup:
 
+                old_info = {}
                 if not os.path.isfile('user_info.json'):
-                    information = {username_signup: password_signup}
+                    information = {username_signup:{'Password': password_signup,'VotesFor':person,'Reason':reason}}
 
                     with open('user_info.json','w') as file:
                         file.write(json.dumps(
@@ -158,18 +192,18 @@ def _home_():
                             sort_keys=False
                         ))
                         file.close()
-                    return render_template('homepage.html', TITLE = "Election Poll App, 2020", USERNAME = username_signup)
-                if os.path.isfile('user_info.json'):
+                    return render_template('login.html', login_from_signup = True, EX = "Login to confirm signup credentials")
+                else:
                     information = json.loads(open('user_info.json','r').read())
 
                     if 'Deleted' in information and username_signup == information['Deleted']:
                         return render_template('error.html', login_redirect = "You're account was deleted by an admin")
-
+                    
                     if username_signup in information:
                         #signup = False
-                        return render_template('error.html', signup_redirect = f"The username {username_signup} already exists")
+                        return render_template('login.html', login_from_signup = True, EX = 'Confirmation login')
 
-                    information.update({username_signup: password_signup})
+                    information.update({username_signup:{'Password': password_signup,'VotesFor':person,'Reason':reason}})
                     with open('user_info.json','w') as file:
 
                         file.write(json.dumps(
@@ -185,7 +219,75 @@ def _home_():
         return render_template('error.html', information = "Cannot access homepage, logged out")
     else:
         return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+"""
+@app.route('/homepage',methods = ['POST','GET'])
+def _home_():
 
+    if server_shutdown == False:
+        try:
+            _user = request.form['username_signup']
+            _pass = request.form['password_signup']
+            _person = request.form['person']
+            _reason = request.form['reason']
+
+            res = make_response(render_template('homepage.html',USERNAME = _user, PERSON = _person, REASON = _reason))
+            res.set_cookie('username',_user,max_age=60*60*24*365*2)
+            res.set_cookie('password',_pass,max_age=60*60*24*365*2)
+            res.set_cookie('person',_person,max_age=60*60*24*365*2)
+            res.set_cookie('reason',_reason,max_age=60*60*24*365*2)
+
+            if not os.path.isfile('user_info.json'):
+                info = {_user:{'Password':_pass,'VotesFor':_person,'Reason':_reason}}
+
+                with open('use_info.json','w') as file:
+                    file.write(json.dumps(
+                        info,
+                        indent=2,
+                        sort_keys=False
+                    ))
+                    file.close()
+            else:
+                info = json.loads(open('user_info.json','r').read())
+
+                if _user in info:
+                    return render_template('error.html', signup_redirect = f'Username {_user} already exists')
+                else:
+                    info.update({_user:{'Password':_pass,'VotesFor':_person,'Reason':_reason}})
+
+                    with open('user_info.json','w') as file:
+                        file.write(json.dumps(
+                            info,
+                            indent=2,
+                            sort_keys=False
+                        ))
+                        file.close()
+
+            return res
+        except:
+            try:
+                _user = request.form['username']
+                _pass = request.form['password']
+
+                info = json.loads(open('user_info.json','r').read())
+
+                if _user in info:
+                    if _pass == info[_user]:
+                        return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
+                    elif not _pass == info[_user]:
+                        return render_template('error.html',login_redirect = "Password was incorrect")
+                    else:
+                        return render_template('error.html',login_redirect = "Incorrect username/password")
+                else:
+                    return render_template('error.html', login_redirect = "User doesn't exist")
+            except:
+                _user = request.cookies.get('username')
+                _pass = request.cookies.get('password')
+                _person = request.cookies.get('person')
+                _reason = request.cookies.get('reason')
+
+                return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
+    else:
+        return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
 
 @app.route('/<ideal>', methods = ['POST','GET'])
