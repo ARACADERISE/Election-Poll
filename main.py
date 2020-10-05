@@ -240,11 +240,15 @@ def _home_():
 def _home_():
 
     if server_shutdown == False:
+        PEOPLE = ['trump','biden']
         try:
             _user = request.form['username_signup']
             _pass = request.form['password_signup']
             _person = request.form['person']
             _reason = request.form['reason']
+
+            if not _person.lower() in PEOPLE:
+                return render_template('error.html',signup_redirect="You can only vote for Biden or Trump")
 
             res = make_response(render_template('homepage.html',USERNAME = _user, PERSON = _person, REASON = _reason))
             res.set_cookie('username',_user,max_age=600*600*240*365*20)
