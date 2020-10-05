@@ -15,6 +15,12 @@ body {
     font-family: 'Anton', sans-serif;
     border-top: 1px solid black;
 }
+.inp {
+    width: 80%;
+    height: 46px;
+    box-align: initial;
+    box-sizing: content-box;
+}
 .image_here {
     background-image: url('./flag.png') no-repeat center;
     z-index: 1;
@@ -35,7 +41,7 @@ body {
   text-align: center;
   padding: 28px 34px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 14px;
 }
 .nav a.float-right {
     float: right;
@@ -57,6 +63,7 @@ body {
   background-color: white;
   color: black;
   transition: all .6s ease-out;
+  cursor: pointer;
 }
 .ProfileInfo {
     font-size: 24px;
@@ -75,16 +82,58 @@ body {
 .Button_ {
     background-color: white;
     color: black;
-    border-radius: 4px;
     transition: .6s ease-out;
-    border: none;
+    border: 1px solid white;
+    width: 200px;
+    height: 50px;
+    /*margin-left: 42px;*/
+    font-size: 16px;
+    letter-spacing: 4px;
+    position: relative;
+}
+.Button_:hover {
+    cursor: pointer;
+}
+/*.Button_:hover {
+    letter-spacing: 8px;
+    background-color: black;
+    transition: all .8s ease-out;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+}*/
+._Button {
+    background-color: white;
+    color: black;
+    transition: .6s ease-out;
+    border: 1px solid white;
     width: 500px;
-    height: 40px;
+    height: 42px;
     margin-left: 42px;
     font-size: 16px;
     letter-spacing: 4px;
 }
-.Button_:hover {
+._Button:hover {
+    letter-spacing: 8px;
+    background-color: black;
+    transition: all .8s ease-out;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+}
+.Button {
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    transition: .6s ease-out;
+    border: none;
+    width: 250px;
+    height: 30px;
+    margin-left: 24px;
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+.Button:hover {
     letter-spacing: 8px;
     background-color: black;
     transition: all .8s ease-out;
