@@ -61,6 +61,7 @@ def _ADMIN_(ideal):
             return render_template('error.html', information = "Cannot access homepage without logging in")
 
 @app.route('/homescreen', methods = ['POST', 'GET'])
+@app.route('/home', methods = ['POST', 'GET'])
 def _homescreen_():
     if server_shutdown == False:
         return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
@@ -96,6 +97,7 @@ def _signup_page_():
 @app.route('/delete', methods = ['POST','GET'])
 def ADMIN_DELETE():
     return render_template('login.html', special_admission = True)
+
 @app.route('/delete_user', methods = ['POST','GET'])
 def ADMIN_DELETE_():
 
@@ -104,15 +106,27 @@ def ADMIN_DELETE_():
         admin_username_value = request.form['username']
 
         if admin_login_value == db["admin_pass"] and admin_username_value == db["admin_user"]:
-            return 'yes'
+            return render_template('remove_user.html')
         else:
             return render_template('error.html', information = 'Something Went Wrong')
 
     except:
         return redirect(url_for('default_render'))
+
 @app.route('/success', methods = ['POST','GET'])
 def _success_():
-    pass
+    
+    try:
+        USER = request.form['USER']
+        REASON = request.form['REASON']
+
+        if USER in db and not 'Deleted' in db[USER]:
+            db[USER] = {'Deleted':True, 'banned_due_to':REASON}
+            return f'User {USER} has been removed, {db[USER]}'
+        else:
+            return redirect(url_for('default_render'))
+    except:
+        return redirect(url_for('default_render'))
     
 @app.route('/vote_form', methods = ['POST','GET'])
 def _vote_form_():
@@ -164,6 +178,9 @@ def _home_():
         res.set_cookie('person',_person,max_age=600*600*240*365*20)
         res.set_cookie('reason',_reason,max_age=600*600*240*365*20)
 
+        if _user in db and 'Deleted' in db[_user]:
+            return render_template('erorr.html', signup_redirect = f"Cannot sign up as {_user}. Account was banned for {db[_user]['banned_due_to']}")
+
         if _user in db:
             return render_template('error.html', signup_redirect = f'Login as {_user} to stayed logged in!')
         else:
@@ -177,6 +194,8 @@ def _home_():
             _pass = request.form['password']
 
             if _user in db:
+                if 'Deleted' in db[_user]:
+                    return render_template('error.html', login_redirect = f"You're account was removed by the developers for {db[_user]['banned_due_to']}")
                 if db[_user]['Password'] == _pass:
 
                     _person = db[_user]['VotesFor']
