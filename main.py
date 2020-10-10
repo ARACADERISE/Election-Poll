@@ -10,6 +10,14 @@ from replit import db
 
 db["admin_user"] = "ADMIN"
 db["admin_pass"] = "POLL_ADMIN_"
+# LIST OF INAPPROPRIATE NAMES
+bad_names = [
+    'fuck', 'dick', 'bitch', 'nigga', 'nigger',
+    'sex', 'porn', 'porno', 'pussy', 'penis',
+    'pornhub.com', 'pornhub', 'xnxx.com', 'xnxx',
+    'xvideos.com', 'xvideos', 'cunt', 'shit', 'bullshit',
+    'fucker', 'anal', 'vagina', 'asshole', 'bastard', 'damn', 'dick head'
+]
 
 app = Flask(__name__)
 
@@ -45,6 +53,30 @@ def default_render():
             return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down', MINI = f'Check back shortly, {_user}')
         except:
             return render_template('server_down.html', MSG = 'Election Poll, 2020: Server Down')
+
+@app.route('/update_about_you', methods = ['POST','GET'])
+def _update_():
+    _user = request.cookies.get('username')
+    return render_template('update_about_you.html', USERNAME = _user)
+@app.route('/check_new_info', methods = ['POST','GET'])
+def _update__():
+
+    try:
+        _user_info = request.form['new_user_info']
+
+        _user = request.cookies.get('username')
+        _pass = request.cookies.get('password')
+        _person = request.cookies.get('person')
+        _reason = request.cookies.get('reason')
+
+        if _user in db:
+            db[_user] = {'Password':_pass,'VotesFor':_person,'Reason':_reason,'AboutUser':_user_info}
+
+            return redirect(url_for('_home_'))
+        else:
+            return 'here'
+    except:
+        return 'ok'
 
 @app.route('/admin/<ideal>', methods = ["POST",'GET'])
 def _ADMIN_(ideal):
@@ -127,7 +159,11 @@ def _success_():
             return redirect(url_for('default_render'))
     except:
         return redirect(url_for('default_render'))
-    
+
+@app.route('/dev_notes', methods = ['POST','GET'])
+def dev_notes():
+    return render_template('dev_notes.html')
+
 @app.route('/vote_form', methods = ['POST','GET'])
 def _vote_form_():
 
@@ -147,15 +183,28 @@ def redirect_():
     try:
         person = request.form['Search_user']
 
+        for i in bad_names:
+            if i in person.lower():
+                _user = request.cookies.get('username')
+                _person = request.cookies.get('person')
+                _reason = request.cookies.get('reason')
+                return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason, err_msg = "Usernames do not include bad words!")
+
         if person in db:
-            if not person == request.cookies.get('username'):
-                return f'Votes For:{db[person]["VotesFor"]}, Reason: {db[person]["Reason"]}'
-            else:
+            if person == request.cookies.get('username'):
                 return redirect(url_for('_home_'))
+            if 'AboutUser' in db[person]:
+                return render_template('visitor_view.html', USERNAME = person, ABOUT = db[person]['AboutUser'])
+            else:
+                return render_template('visitor_view.html', USERNAME = person)
         else:
-            return render_template('error.html', information = 'User does not exist')
+            return redirect(url_for('_home_'))
         
-    except: return 'no'
+    except: 
+        _user = request.cookies.get('username')
+        _person = request.cookies.get('person')
+        _reason = request.cookies.get('reason')
+        return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
 
 @app.route('/homepage',methods = ['POST','GET'])
 def _home_():
@@ -171,20 +220,31 @@ def _home_():
 
         if not _person.lower() in PEOPLE:
             return render_template('error.html',signup_redirect="You can only vote for Biden or Trump")
+        
+        for i in bad_names:
+            if i in _user.lower() or i in _pass.lower():
+                _user = request.cookies.get('username')
+                _person = request.cookies.get('person')
+                _reason = request.cookies.get('reason')
+                return render_template('error.html', signup_redirect = "Usernames/Passwords do not include bad words!")
 
+        if _user in db and 'Deleted' in db[_user]:
+            return render_template('erorr.html', signup_redirect = f"Cannot sign up as {_user}. Account was banned for {db[_user]['banned_due_to']}")
+
+        if not _user in db:
+            if len(_user) >= 20:
+                return render_template('error.html',signup_redirect = 'Username too long. Must be under 20 characters')
+            
+            if _user == 'MocaCDeveloper' or _user == 'Coder100':
+                db[_user] = {'Password':_pass,'VotesFor':_person,'Reason':_reason,'Entitled':'Mod'}
+            else:
+                db[_user] = {'Password':_pass,'VotesFor':_person,'Reason':_reason}
+        
         res = make_response(render_template('homepage.html',USERNAME = _user, PERSON = _person, REASON = _reason))
         res.set_cookie('username',_user,max_age=600*600*240*365*20)
         res.set_cookie('password',_pass,max_age=600*600*240*365*20)
         res.set_cookie('person',_person,max_age=600*600*240*365*20)
         res.set_cookie('reason',_reason,max_age=600*600*240*365*20)
-
-        if _user in db and 'Deleted' in db[_user]:
-            return render_template('erorr.html', signup_redirect = f"Cannot sign up as {_user}. Account was banned for {db[_user]['banned_due_to']}")
-
-        if _user in db:
-            return render_template('error.html', signup_redirect = f'Login as {_user} to stayed logged in!')
-        else:
-            db[_user] = {'Password':_pass,'VotesFor':_person,'Reason':_reason}
 
         return res
     except:
@@ -193,6 +253,13 @@ def _home_():
             _user = request.form['username']
             _pass = request.form['password']
 
+            for i in bad_names:
+                if i in _user.lower() or i in _pass.lower():
+                    _user = request.cookies.get('username')
+                    _person = request.cookies.get('person')
+                    _reason = request.cookies.get('reason')
+                    return render_template('error.html', login_redirect = "Usernames/Passwords do not include bad words!")
+
             if _user in db:
                 if 'Deleted' in db[_user]:
                     return render_template('error.html', login_redirect = f"You're account was removed by the developers for {db[_user]['banned_due_to']}")
@@ -200,7 +267,12 @@ def _home_():
 
                     _person = db[_user]['VotesFor']
                     _reason = db[_user]['Reason']
-                    res = make_response(render_template('homepage.html',USERNAME = _user, PERSON = _person, REASON = _reason))
+
+                    #res = None
+                    if 'AboutUser' in db[_user]:
+                        res = make_response(render_template('homepage.html',USERNAME = _user, PERSON = _person, REASON = _reason, ABOUT = db[_user]['AboutUser']))
+                    else:
+                        res = make_response(render_template('homepage.html',USERNAME = _user, PERSON = _person, REASON = _reason))
                     res.set_cookie('username',_user,max_age=600*600*240*365*20)
                     res.set_cookie('password',_pass,max_age=600*600*240*365*20)
                     res.set_cookie('person',_person,max_age=600*600*240*365*20)
@@ -219,7 +291,10 @@ def _home_():
             _reason = request.cookies.get('reason')
 
             if _user in db:
-                return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
+                if 'AboutUser' in db[_user]:
+                    return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason, ABOUT = db[_user]['AboutUser'])
+                else:
+                    return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
             return 'NO'
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
 
