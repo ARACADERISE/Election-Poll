@@ -8,30 +8,54 @@
     <body>
         
         <div class="nav">
-            <a class="active border-right">Hello, {{ USERNAME }}!</a>
-            <a class="A border-right">Community</a>
-            <a class="A border-right">Messages</a>
-            <a class="A border-right">Overall Statistics</a>
+            <a class="active">{{ USERNAME }}</a>
+            <a class="A move-right">Community</a>
+            <a class="A">Messages</a>
+            <a class="A">Overall Statistics</a>
             <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
             <a class="A float-right" href="{{ url_for('_homescreen_') }}">Logout</a>
         </div>
 
         <div class="ProfileInfo">
 
-            <form action="{{url_for('redirect_')}}" method="post">
-                <input class="inp" name="Search_user" placeholder="Search for a user"><button class="Button_" type="submit">Search</button></input></br>
-                {%if err_msg%}
-                <p>{{err_msg}}</p>
-                {%endif%}
-            </form></br>
+            <div class="search-bar">
+                <form action="{{url_for('redirect_')}}" method="post">
+                    <input class="inp" name="Search_user" placeholder="Search for a user">
+                    <!--<button class="Button_" type="submit">Search</button>--></input>
+                    {%if err_msg%}
+                    <p style="font-size:12px;color:red;text-align:center">{{err_msg}}</p>
+                    {%endif%}
+                </form>
+                <p style="font-size:12px">See <a href="{{url_for('dev_notes')}}">Developer Notes</a> for additional information from the <b>Developers</b></p>
+            </div>
 
-            <p class="small"><i>DEVELOPERS NOTE: You are automatically logged out when you exit the page</i></br>Make webpage where developers can put notes for users to see</p>
-            <h1>Profile Information</h1>
-            <p class="large">You're Voting For For: {{PERSON.upper()}}</p>
-            <p class="large">You're Reasoning: {{REASON}}</p></br>
-            <form action="/">
-                <button class="_Button">Change Password</button>
-            </form>
+            <h3>Howdy, <i>{{USERNAME.upper()}}</i>!</h3>
+
+            <div class="large">
+                <p>Update Profile:</p>
+
+                {%if ABOUT%}
+                <p>About You:</p>
+                <div class="large_extra">
+                    <p>{{ABOUT}}</p>
+                </div>
+                {%endif%}
+                <p>Change Pass:</p>
+                <div class="large_extra">
+                    <!-- CHANGE PASSWORD -->
+                    <a href="/"><button class="_Button">Change Password</button></a>
+                </div>
+                <p>Update Personal Info:</p>
+                <div class="large_extra">
+                    <!-- UPDATE ABOUT YOU -->
+                    <a href="{{url_for('_update_')}}"><button class="_Button">Update <i>About You</i></button></a>
+                </div>
+                <p>Current Notifications:</p>
+                </div>
+            </div>
+            <!--<h1>Howdy, <i>{{USERNAME.upper()}}</i>!</h1>
+            <p class="large">Voting For: {{PERSON}}</p>
+            <p class="large">Reasoning: {{REASON}}</p>-->
         </div>
 
         <footer class="bottom">
