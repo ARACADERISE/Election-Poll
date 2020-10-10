@@ -15,14 +15,10 @@
             <p style="font-size: 13px">{{additional}}</p>
             {%endif%}
             <p style="font-size:10px">{{extra}}</p>
-            <form action="{{ url_for('_home_') }}">
-                <button class="BackButton" type="submit">Go Back</button>
-            </form>
+            <a href="/home"><button class="BackButton" type="submit">Go Back</button></a>
             {%elif login_redirect %}
             <p>{{login_redirect}}</p>
-            <form action="{{url_for('_login_page_')}}">
-                <button class="BackButton" type="submit">Go Back</button>
-            </form>
+            <a href="{{url_for('_login_page_')}}"><button class="BackButton" type="submit">Go Back</button></a></br>
             <a style="font-size:12px" href="{{ url_for('_signup_page_') }}">Sign Up</a>
             {%elif signup_redirect%}
             <p>{{signup_redirect}}</p>
