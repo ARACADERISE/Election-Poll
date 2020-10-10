@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}"/>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="nav">
+            <a class="active">Profile Of {{USERNAME}}</a>
+            <a class="A">Community</a>
+            <a class="A">Messages</a>
+            <a class="A">Overall Statistics</a>
+            <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
+            <a class="A float-right" href="{{ url_for('_home_') }}">Go Back</a>
+        </div>
+
+        <div class="ProfileInfo">
+            <h2>{{USERNAME}}s Profile</h2>
+            <div class="large_extra">
+                {%if ABOUT%}
+                <p>About User:</p>
+                <p>{{ABOUT}}</p>
+                {%endif%}
+            </div>
+        </div>
+
+        <footer class="bottom">
+            <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
+        </footer>
+    </body>
+</html>
