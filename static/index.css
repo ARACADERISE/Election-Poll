@@ -1,8 +1,27 @@
 body {
     font-family: 'Cousine', monospace;
     margin: 0;
-    background-color: black;
-    color: white;
+    /*background-color: #282828;*/
+    /*background-color: #1A1A1D;*/
+    background: #EAE7DC;
+    color: #E85A4F;
+}
+.update_about_you {
+    margin-top: 24px;
+    padding-top: 24px;
+}
+.note {
+    height: 100px;
+    width: 650px;
+    border: 1px solid black;
+    border-radius: 6px;
+    color: black;
+    margin: 24px 28px;
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 14px;
+    box-sizing: content-box;
+    background-color: white;
 }
 .bottom {
     position: fixed;
@@ -13,13 +32,27 @@ body {
     color: black;
     text-align: center;
     font-family: 'Anton', sans-serif;
-    border-top: 1px solid black;
+    border: none;
+}
+.active {
+    background-color: #efef;
 }
 .inp {
-    width: 80%;
+    width: 85%;
     height: 46px;
     box-align: initial;
     box-sizing: content-box;
+    /*border: 1px solid rgb(225, 160, 255);*/
+    border: none;
+    border-radius: 6px;
+}
+.inp_ {
+    width: 65%;
+    height: 150px;
+    box-align: initial;
+    box-sizing: content-box;
+    border: none;
+    border-radius: 6px;
 }
 .image_here {
     background-image: url('./flag.png') no-repeat center;
@@ -28,8 +61,8 @@ body {
 }
 .nav {
   overflow: hidden;
-  background-color: black;
-  border-bottom: 1px solid white;
+  background: linear-gradient(rgba(255, 175, 235),rgba(107, 238, 255));
+  /*border-bottom: 1px solid white;*/
 }
 .nav a.border-right {
     border-right: 1px solid white;
@@ -37,7 +70,7 @@ body {
 
 .nav a {
   float: left;
-  color: white;
+  color: black;
   text-align: center;
   padding: 28px 34px;
   text-decoration: none;
@@ -60,39 +93,58 @@ body {
 }
 
 .A:hover {
-  background-color: white;
+  background-color: #efef;
   color: black;
   transition: all .6s ease-out;
   cursor: pointer;
 }
 .ProfileInfo {
     font-size: 24px;
-    padding: 26px 28px;
-    margin: 16px 20px;
+    padding: 20px 22px;
+    margin: 20px 24px;
     box-sizing: content-box;
+}
+.search-bar {
+    /*padding-top: 32px;
+    padding-bottom: 32px;*/
+    float: center;
+    align-items: center;
+    text-align: center;
+    /*background-image: url('/static/ForWebsite.png');*/
+    border-radius: 4px;
 }
 .large {
     font-size: 20px;
     margin-left: 42px;
+}
+.large_extra {
+    font-size: 20px;
+    margin-left: 50px;
+    padding-left: 12px;
 }
 .small {
     font-size: 12px;
     margin-left: 42px;
 }
 .Button_ {
-    background-color: white;
+    background-color: lightyellow;
     color: black;
     transition: .6s ease-out;
-    border: 1px solid white;
     width: 200px;
-    height: 50px;
+    height: 47px;
     /*margin-left: 42px;*/
     font-size: 16px;
     letter-spacing: 4px;
-    position: relative;
+    box-align: initial;
+    box-sizing: content-box;
+    border: none;
 }
 .Button_:hover {
     cursor: pointer;
+}
+.Button_:hover {
+    background-color: #efef;
+    transition: all .6s ease-out;
 }
 /*.Button_:hover {
     letter-spacing: 8px;
@@ -103,22 +155,30 @@ body {
     cursor: pointer;
 }*/
 ._Button {
-    background-color: white;
-    color: black;
+    background-color: #EAE7DC;
+    color: chocolate;
     transition: .6s ease-out;
-    border: 1px solid white;
-    width: 500px;
+    border: 1px solid #8E8D8A;
+    width: 250px;
     height: 42px;
     margin-left: 42px;
     font-size: 16px;
     letter-spacing: 4px;
+    font-style: bold;
+}
+.upd {
+    margin: 62px 84px;
+    padding: 62px 84px;
+    box-align: initial;
+    box-sizing: content-box;
 }
 ._Button:hover {
-    letter-spacing: 8px;
-    background-color: black;
-    transition: all .8s ease-out;
-    color: white;
-    border: 1px solid white;
+    transition: all 1s ease-out;
+    transition-timing-function: cubic-bezier(0.100, 0.03, 0.485, 0.22), ease;
+    transition-delay: 0.1s;
+    transform: rotate(360deg);
+    opacity: 0.9;
+    box-shadow: 1px 8px 10px 1px rgb(158, 155, 155);
     cursor: pointer;
 }
 .Button {
