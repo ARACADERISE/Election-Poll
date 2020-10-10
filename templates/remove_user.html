@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static',filename='login.css')}}"/>
+  </head>
+
+  <body>
+      <div class="head">
+          <h1>ADMIN Remove User</h1>
+          <form action="{{url_for('_success_')}}" method="POST">
+              <input class="inp" name="USER" placeholder="User To Delete" required></br>
+              <input class="inp" name="REASON" placeholder="Why Delete The User?" required></br></br>
+              <button class="Button" type="submit">Remove User</button>
+          </form>
+      </div>
+  </body>
+</html>
