@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static', filename = 'index.css')}}"></head>
+    </head>
+    <body>
+        
+        <div class="nav">
+            <a class="active">Dev Notes</a>
+            <a class="A">Community</a>
+            <a class="A">Messages</a>
+            <a class="A">Overall Statistics</a>
+            <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
+            <a class="A float-right" href="{{ url_for('_home_') }}">Go Back</a>
+        </div>
+
+        <!-- DEFAULT NOTES ENTERED MANUALLY -->
+        <div class="note">
+            <p><b>DEFAULT NOTE</b></br> Be Aware: If the website redirects you to homescreen, just put <i>'/homepage'</i> at the end of the URL</p>
+        </div>
+        <div class="note">
+            <p><b>DEFAULT NOTE</b></br> The website blocks any form of foul language. Be careful with the way you talk!</p>
+        </div>
+
+        <!-- Extra notes added -->
+
+    </body>
+</html>
