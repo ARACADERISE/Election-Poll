@@ -2,13 +2,47 @@ body {
     font-family: 'Cousine', monospace;
     margin: 0;
     /*background-color: #282828;*/
-    /*background-color: #1A1A1D;*/
-    background: #EAE7DC;
+    background-color: #1A1A1D;
+    /*background: #EAE7DC;*/
     color: #E85A4F;
 }
 .update_about_you {
     margin-top: 24px;
     padding-top: 24px;
+}
+.centered {
+    align-items: center;
+    text-align: center;
+    box-sizing: content-box;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.PopUp {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    /*padding-top: 100px;*/ /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    float: center;
+}
+.extra {
+    background: #EAE7DC;
+    color: coral;
+    margin: auto;
+    margin-top: 120px;
+    padding: 20px;
+    width: 80%;
+    float: center;
+    text-align: left;
 }
 .move-right {
     margin-left: 32px;
@@ -158,10 +192,22 @@ body {
     cursor: pointer;
 }*/
 ._Button {
-    background-color: #EAE7DC;
+    /*background-color: #EAE7DC;*/
+    background-color: #1A1A1D;
     color: chocolate;
     transition: .6s ease-out;
     border: 1px solid #8E8D8A;
+    width: 450px;
+    height: 42px;
+    margin-left: 42px;
+    font-size: 16px;
+    letter-spacing: 4px;
+    font-style: bold;
+}
+._Button_ {
+    background-color: #EAE7DC;
+    border: 1px solid #8E8D8A;
+    color: chocolate;
     width: 250px;
     height: 42px;
     margin-left: 42px;
@@ -181,7 +227,28 @@ body {
     transition-delay: 0.1s;
     transform: rotate(360deg);
     opacity: 0.9;*/
-    box-shadow: 1px 8px 10px 1px rgb(158, 155, 155);
+    box-shadow: 1px 1px rgb(221, 216, 216);
+    cursor: pointer;
+}
+.button {
+    background-color: #1A1A1D;
+    color: chocolate;
+    transition: .6s ease-out;
+    border: 1px solid #8E8D8A;
+    width: 450px;
+    height: 42px;
+    font-size: 16px;
+    letter-spacing: 4px;
+    font-style: bold;
+}
+.button:hover {
+    transition: all 1s ease-out;
+    box-shadow: 1px 1px rgb(221, 216, 216);
+    cursor: pointer;
+}
+._Button_:hover {
+    transition: all 1s ease-out;
+    box-shadow: 1px 4px 6px 2px rgb(221, 216, 216);
     cursor: pointer;
 }
 .Button {
