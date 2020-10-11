@@ -10,6 +10,9 @@ body {
     margin-top: 24px;
     padding-top: 24px;
 }
+.move-right {
+    margin-left: 32px;
+}
 .note {
     height: 100px;
     width: 650px;
@@ -174,10 +177,10 @@ body {
 }
 ._Button:hover {
     transition: all 1s ease-out;
-    transition-timing-function: cubic-bezier(0.100, 0.03, 0.485, 0.22), ease;
+    /*transition-timing-function: cubic-bezier(0.100, 0.03, 0.485, 0.22), ease;
     transition-delay: 0.1s;
     transform: rotate(360deg);
-    opacity: 0.9;
+    opacity: 0.9;*/
     box-shadow: 1px 8px 10px 1px rgb(158, 155, 155);
     cursor: pointer;
 }
