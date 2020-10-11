@@ -9,7 +9,7 @@
         
         <div class="nav">
             <a class="active">{{ USERNAME }}</a>
-            <a class="A move-right">Community</a>
+            <a class="A">Community</a>
             <a class="A">Messages</a>
             <a class="A">Overall Statistics</a>
             <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
@@ -30,9 +30,20 @@
             </div>
 
             <h3>Howdy, <i>{{USERNAME.upper()}}</i>!</h3>
+            {%if PERSON.lower() == 'trump'%}
+            <p style="color:blue;font-size:15px">#TrumpSupporter</p>
+            {%endif%}
+            {%if PERSON.lower() == 'biden'%}
+            <p style="color:blue;font-size:15px">#BidenSupporter</p>
+            {%endif%}
 
             <div class="large">
                 <p>Update Profile:</p>
+
+                <a href="{{url_for('_change_pass_')}}"><button class="_Button">Change Password</button></a>
+
+                    <!-- UPDATE ABOUT YOU -->
+                    <a href="{{url_for('_update_')}}"><button class="_Button">Update <i>About You</i></button></a>
 
                 {%if ABOUT%}
                 <p>About You:</p>
@@ -40,18 +51,11 @@
                     <p>{{ABOUT}}</p>
                 </div>
                 {%endif%}
-                <p>Change Pass:</p>
-                <div class="large_extra">
+                <!--<div class="large_extra">--
                     <!-- CHANGE PASSWORD -->
-                    <a href="/"><button class="_Button">Change Password</button></a>
-                </div>
-                <p>Update Personal Info:</p>
-                <div class="large_extra">
-                    <!-- UPDATE ABOUT YOU -->
-                    <a href="{{url_for('_update_')}}"><button class="_Button">Update <i>About You</i></button></a>
                 </div>
                 <p>Current Notifications:</p>
-                </div>
+                <!--</div>-->
             </div>
             <!--<h1>Howdy, <i>{{USERNAME.upper()}}</i>!</h1>
             <p class="large">Voting For: {{PERSON}}</p>
