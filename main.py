@@ -28,7 +28,8 @@ server_shutdown = False # set to False to start running the server
 @app.route('/')
 def default_render():
     if server_shutdown == False:
-        return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
+        res = make_response(render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020!!!!'))
+        return res
     else:
         if os.path.isfile('information.json'):
             op = json.loads(open('information.json','r').read())
@@ -57,7 +58,11 @@ def default_render():
 @app.route('/update_about_you', methods = ['POST','GET'])
 def _update_():
     _user = request.cookies.get('username')
-    return render_template('update_about_you.html', USERNAME = _user)
+
+    if 'AboutUser' in db[_user]:
+        return render_template('update_about_you.html', USERNAME = _user, CURR_ABOUT = db[_user]['AboutUser'])
+    else:
+        return render_template('update_about_you.html', USERNAME = _user)
 @app.route('/check_new_info', methods = ['POST','GET'])
 def _update__():
 
@@ -96,7 +101,10 @@ def _ADMIN_(ideal):
 @app.route('/home', methods = ['POST', 'GET'])
 def _homescreen_():
     if server_shutdown == False:
-        return render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020')
+        res = make_response(render_template('temp.html', WELCOME_MSG = 'Welcome to Election Poll, 2020'))
+        res.delete_cookie('username')
+        res.delete_cookie('password')
+        return res
     else:
         try:
             _user = request.cookies.get('username')
@@ -205,6 +213,32 @@ def redirect_():
         _person = request.cookies.get('person')
         _reason = request.cookies.get('reason')
         return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
+    
+@app.route('/change_password', methods = ['POST','GET'])
+def _change_pass_():
+    return render_template('change_password.html')
+@app.route('/check_new_pass', methods = ['POST', 'GET'])
+def transmit_new_pass():
+    try:
+        new_pass = request.form['new_pass']
+        _user = request.cookies.get('username')
+        _person = request.cookies.get('person')
+        _reason = request.cookies.get('person')
+        db_ = db[_user]
+        
+        if new_pass == db_['Password']:
+            return render_template('change_password.html',err = 'Password Must Be Different Than Current Password')
+        
+        res = make_response(render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON =_reason))
+        
+        if 'AboutUser' in db_:
+            db[_user] = {'Password':new_pass,'VotesFor':_person, 'Reason':_reason, 'AboutUser':db_['AboutUser']}
+        else:
+            db[_user] = {'Password':new_pass,'VotesFor':_person, 'Reason':_reason}
+        
+        res.set_cookie('password',new_pass,max_age=600*600*240*365*20)
+        return res
+    except: return 'uh oh'
 
 @app.route('/homepage',methods = ['POST','GET'])
 def _home_():
@@ -295,7 +329,7 @@ def _home_():
                     return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason, ABOUT = db[_user]['AboutUser'])
                 else:
                     return render_template('homepage.html', USERNAME = _user, PERSON = _person, REASON = _reason)
-            return 'NO'
+            return render_template('error.html', login_redirect = "Logged Out")
 # _figure_it_out_ will probably be for users specific requests to certain spots of the website
 
 @app.route('/<ideal>', methods = ['POST','GET'])
