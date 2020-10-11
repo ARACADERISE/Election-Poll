@@ -18,48 +18,84 @@
 
         <div class="ProfileInfo">
 
-            <div class="search-bar">
+            <!--<div class="search-bar">
                 <form action="{{url_for('redirect_')}}" method="post">
-                    <input class="inp" name="Search_user" placeholder="Search for a user">
-                    <!--<button class="Button_" type="submit">Search</button>--></input>
+                    <input class="inp" name="Search_user" placeholder="Search for a user">-->
+                    <!--<button class="Button_" type="submit">Search</button>--><!--</input>
                     {%if err_msg%}
                     <p style="font-size:12px;color:red;text-align:center">{{err_msg}}</p>
                     {%endif%}
                 </form>
-                <p style="font-size:12px">See <a href="{{url_for('dev_notes')}}">Developer Notes</a> for additional information from the <b>Developers</b></p>
-            </div>
+                <p style="font-size:12px">See <a href="{{url_for('dev_notes')}}" style="color:red">Developer Notes</a> for additional information from the <b>Developers</b></p>
+            </div>-->
 
-            <h3>Howdy, <i>{{USERNAME.upper()}}</i>!</h3>
-            {%if PERSON.lower() == 'trump'%}
-            <p style="color:blue;font-size:15px">#TrumpSupporter</p>
-            {%endif%}
-            {%if PERSON.lower() == 'biden'%}
-            <p style="color:blue;font-size:15px">#BidenSupporter</p>
-            {%endif%}
+            <div class="centered">
+                <h2 style="font-size:52px">{{USERNAME}}(0)</h2>
 
-            <div class="large">
-                <p>Update Profile:</p>
+                <h3>Notifications:</h3>
 
-                <a href="{{url_for('_change_pass_')}}"><button class="_Button">Change Password</button></a>
-
-                    <!-- UPDATE ABOUT YOU -->
-                    <a href="{{url_for('_update_')}}"><button class="_Button">Update <i>About You</i></button></a>
-
-                {%if ABOUT%}
-                <p>About You:</p>
-                <div class="large_extra">
-                    <p>{{ABOUT}}</p>
+                <div style="margin-top:64px">
+                    {%if PERSON.lower() == 'trump'%}
+                    <p style="font-size:12px;color:red">#TrumpSupporter</p>
+                    {%endif%}
+                    {%if PERSON.lower() == 'biden'%}
+                    <p style="font-size:12px;color:blue">#BidenSupporter</p>
+                    {%endif%}
+                    <button id="popup" class="button">Additional</button>
                 </div>
-                {%endif%}
-                <!--<div class="large_extra">--
-                    <!-- CHANGE PASSWORD -->
+                <div id="show" class="PopUp">
+                    <div class="extra">
+                        <span class="close" title="Close">&times;</span>
+                        <div class="search-bar">
+                            <form action="{{url_for('redirect_')}}" method="post">
+                                <p style="font-size:14px">Search:</p>
+                                <input class="inp" name="Search_user" placeholder="Search for a user">
+                                <!--<button class="Button_" type="submit">Search</button>--></input>
+                                {%if err_msg%}
+                                <p style="font-size:12px;color:red;text-align:center">{{err_msg}}</p>
+                                {%endif%}
+                            </form>
+                            <p style="font-size:12px">See <a href="{{url_for('dev_notes')}}" style="color:red">Developer Notes</a> for additional information from the <b>Developers</b></p>
+                        </div>
+                        <hr>
+
+                        <div class="centered">
+                            <h1 style="font-size:32px">Personal</h1>
+                            <!-- Update Password -->
+                            <a href="{{url_for('_change_pass_')}}"><button class="_Button_">Change Password</button></a>
+
+                            <!-- UPDATE ABOUT YOU -->
+                            <a href="{{url_for('_update_')}}"><button class="_Button_">Update <i>About You</i></button></a>
+
+                            {%if ABOUT%}
+                            <p>About You:</p>
+                            <div class="large_extra">
+                                <p>{{ABOUT}}</p>
+                            </div>
+                            {%endif%}
+                        </div>
                 </div>
-                <p>Current Notifications:</p>
-                <!--</div>-->
+                <script type="text/javascript">
+                    btn = document.getElementById('popup');
+                    close = document.getElementsByClassName("close")[0];
+                    info = document.getElementById('show');
+                    btn.onclick = function() {
+                        info.style.display = 'block';
+                    }
+                    close.onclick = function() {
+                        info.style.display = 'none';
+                    }
+                    window.onclick = function(event) {
+                        if(event.target == info) {
+                            info.style.display = 'none';
+                        }
+                    }
+                </script>
             </div>
-            <!--<h1>Howdy, <i>{{USERNAME.upper()}}</i>!</h1>
-            <p class="large">Voting For: {{PERSON}}</p>
-            <p class="large">Reasoning: {{REASON}}</p>-->
+        </div>
+        </br>
+        <div class="large">
+            <h1>Trending Debates</h1>
         </div>
 
         <footer class="bottom">
