@@ -7,14 +7,14 @@
     </head>
     <body>
         
-        <div class="nav">
+        <nav class="nav">
             <a class="active">{{ USERNAME }}</a>
             <a class="A">Community</a>
-            <a class="A">Messages</a>
+            <a class="A" href="{{url_for('_talk_')}}">Notifications</a>
             <a class="A">Overall Statistics</a>
             <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
             <a class="A float-right" href="{{ url_for('_homescreen_') }}">Logout</a>
-        </div>
+        </nav>
 
         <div class="ProfileInfo">
 
@@ -31,8 +31,12 @@
 
             <div class="centered">
                 <h2 style="font-size:52px">{{USERNAME}}(0)</h2>
-
-                <h3>Notifications:</h3>
+                {%if MOD%}
+                <h4>{{MOD}}</h4>
+                {%endif%}
+                {%if USERNAME == '*'*USERNAME|length%}
+                <h6>Developers Warning: You're name included bad profanity!</h6>
+                {%endif%}
 
                 <div style="margin-top:64px">
                     {%if PERSON.lower() == 'trump'%}
@@ -41,62 +45,90 @@
                     {%if PERSON.lower() == 'biden'%}
                     <p style="font-size:12px;color:blue">#BidenSupporter</p>
                     {%endif%}
+                    <hr style="color:white">
+                    <h2>Choices:</h2>
+                    <button id="popup2" class="button">Profile</button>
                     <button id="popup" class="button">Additional</button>
+                    <a href="{{url_for('create_debate_room')}}"><button class="button">Create Debate Room</button></a><br><br>
+                    <a href="{{url_for('debate_rooms')}}"><button class="button" type="submit">See Debate Rooms</button></a>
+                </div>
+                <div id="show_" class="PopUp">
+                    <div class="extra">
+                        <span class="close2" title="close">&times;</span>
+                        <div class="centered">
+                            <h1 style="font-size:32px">Profile</h1>
+                            <!-- Update Password -->
+                            <a href="{{url_for('_change_pass_')}}"><button class="_Button_">Change Password</button></a>
+
+                            <!-- UPDATE ABOUT YOU -->
+                            <a href="{{url_for('_update_')}}"><button class="_Button_">Update <i>About You</i></button></a>
+                            </br>
+                            {%if ABOUT%}
+                            <hr>
+                            <p>About You:</p>
+                            <div class="large_extra">
+                                <p>{{ABOUT}}</p>
+                            </div>
+                            {%endif%}
+                            <hr>
+                            <h2 style="text-align:left">Notifications</h2>
+                        </div>
+                    </div>
                 </div>
                 <div id="show" class="PopUp">
                     <div class="extra">
                         <span class="close" title="Close">&times;</span>
                         <div class="search-bar">
                             <form action="{{url_for('redirect_')}}" method="post">
-                                <p style="font-size:14px">Search:</p>
+                                <p>Search:</p>
                                 <input class="inp" name="Search_user" placeholder="Search for a user">
                                 <!--<button class="Button_" type="submit">Search</button>--></input>
                                 {%if err_msg%}
                                 <p style="font-size:12px;color:red;text-align:center">{{err_msg}}</p>
                                 {%endif%}
                             </form>
-                            <p style="font-size:12px">See <a href="{{url_for('dev_notes')}}" style="color:red">Developer Notes</a> for additional information from the <b>Developers</b></p>
-                        </div>
-                        <hr>
-
-                        <div class="centered">
-                            <h1 style="font-size:32px">Personal</h1>
-                            <!-- Update Password -->
-                            <a href="{{url_for('_change_pass_')}}"><button class="_Button_">Change Password</button></a>
-
-                            <!-- UPDATE ABOUT YOU -->
-                            <a href="{{url_for('_update_')}}"><button class="_Button_">Update <i>About You</i></button></a>
-
-                            {%if ABOUT%}
-                            <p>About You:</p>
-                            <div class="large_extra">
-                                <p>{{ABOUT}}</p>
-                            </div>
+                            <hr>
+                            <p>Developer Notes:</p>
+                            {%if top_note%}
+                            <p>Top Note: {{top_note}}</p>
                             {%endif%}
+                            <p style="font-size:15px"><i>See <a href="{{url_for('dev_notes')}}" style="color:red">Developer Notes</a> for additional information from the <b>Developers</b></i></p>
+                            <hr><br>
                         </div>
+
                 </div>
                 <script type="text/javascript">
                     btn = document.getElementById('popup');
+                    btn2 = document.getElementById('popup2')
                     close = document.getElementsByClassName("close")[0];
+                    close2 = document.getElementsByClassName('close2')[0]
                     info = document.getElementById('show');
+                    info2 = document.getElementById('show_')
                     btn.onclick = function() {
                         info.style.display = 'block';
                     }
+                    btn2.onclick = function() {
+                        info2.style.display = 'block';
+                    }
                     close.onclick = function() {
+                        info.style.display = 'none';
+                    }
+                    close2.onclick = function() {
                         info.style.display = 'none';
                     }
                     window.onclick = function(event) {
                         if(event.target == info) {
                             info.style.display = 'none';
+                            info2.style.display = 'none';
+                        }
+                        if(event.target == info2) {
+                            info2.style.display = 'none';
                         }
                     }
                 </script>
             </div>
         </div>
         </br>
-        <div class="large">
-            <h1>Trending Debates</h1>
-        </div>
 
         <footer class="bottom">
             <p style="font-size:22px;">Copyright, 2020, Coder100 & MocaCDeveloper. All Rights Reserved</p>
