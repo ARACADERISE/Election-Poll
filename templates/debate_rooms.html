@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}"/>
+        <title>Debate Rooms</title>
+    </head>
+
+    <body>
+        <nav class="nav">
+            <a class="active">{{ USERNAME }}</a>
+            <a class="A">Community</a>
+            <a class="A" href="{{url_for('_talk_')}}">Notifications</a>
+            <a class="A">Overall Statistics</a>
+            <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
+            <a class="A float-right" href="{{ url_for('_home_') }}">Go Back</a>
+        </nav>
+
+        <!--<div class="centered">-->
+            <div style="margin-top:124px">
+                <h1 style="margin-left:180px">Debate Rooms:</h1>
+                {%if DEBATE_ROOMS%}
+                {%for i in DEBATE_ROOMS%}
+                <div class="debate_room_info">
+                    <h2>Room Name: {{i['RoomName']}}</h2>
+                    <h4>Information: {{i['Details']}}</h4>
+                    <p style="font-size:14px">Owner: {{i['RoomOwner']}}</p>
+                    <a href="/"><button class="button_" style="float:center;text-align:center">Go</button></a>
+                </div>
+                {%endfor%}
+                {%else%}
+                <p>No Debate Rooms, Try Again</p>
+                {%endif%}
+            </div>
+        <!--</div>-->
+    </body>
+</html>
