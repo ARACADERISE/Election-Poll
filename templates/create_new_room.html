@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static',filename='login.css')}}"/>
+        <title>Create New Room</title>
+    </head>
+
+    <body>
+        <div class="head">
+            <h3>Create new room, {{USERNAME}}</h3>
+
+            <form action="{{url_for('_create_new_room_')}}" method="post">
+                <input class="inp" placeholder="New Debate Room Name" name="new_room_name"><br>
+                <input class="inp" name="new_room_details" placeholder="New Room Details"><br><br>
+                <button class="Button" type="submit">Create new room</button>
+            </form><br>
+            <a href="{{url_for('_home_')}}"><button class="Button" type="submit">Go back</button></a>
+        </div>
+    </body>
+</html>
