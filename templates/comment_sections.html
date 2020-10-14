@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}"/>
+        <script type="text/javascript" src="{{url_for('static',filename='index.css')}}"></script>
+    </head>
+
+    <body>
+        <div class="nav">
+            <a class="active">{{ USERNAME }}</a>
+            <a class="A">Community</a>
+            <a class="A">Notifications</a>
+            <a class="A">Overall Statistics</a>
+            <a class="float-center">Created and Brought To You By: Coder100 & MocaCDeveloper</a>
+            <a class="A float-right" href="{{ url_for('_homescreen_') }}">Logout</a>
+        </div>
+
+        <div class="ProfileInfo">
+
+            <div class="centered" style="margin-top:200px">
+                <h1>Choose:</h1>
+
+                <button id="notifications" class="button">Current Notifications</button>
+                <button id="debate_rooms" class="button">Debate Rooms</button>
+            </div>
+
+            <div id="notif" class="PopUp">
+                <div class="extra">
+                    <span class="close">&times;</span>
+                    <h1>HEY</h1>
+                </div>
+            </div>
+            <div id="debates" class="PopUp">
+                <div class="extra">
+                    <span class="close2">&times;</span>
+                    <h1>Hey</h1>
+                </div>
+            </div>
+            <script type="text/javascript">
+                btn = document.getElementById('notifications');
+                btn2 = document.getElementById('debate_rooms')
+                close = document.getElementsByClassName("close")[0];
+                close2 = document.getElementsByClassName('close2')[0]
+                info = document.getElementById('notif');
+                info2 = document.getElementById('debates')
+                btn.onclick = function() {
+                    info.style.display = 'block';
+                }
+                btn2.onclick = function() {
+                    info2.style.display = 'block';
+                }
+                close.onclick = function() {
+                    info.style.display = 'none';
+                }
+                close2.onclick = function() {
+                    info2.style.display = 'none';
+                }
+                window.onclick = function(event) {
+                    if(event.target == info) {
+                        info.style.display = 'none';
+                    }
+                    if(event.target == info2) {
+                        info2.style.display = 'none';
+                    }
+                }
+            </script>
+
+        </div>
+    </body>
+</html>
