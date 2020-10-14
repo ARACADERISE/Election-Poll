@@ -13,7 +13,25 @@ body {
 .centered {
     align-items: center;
     text-align: center;
-    box-sizing: content-box;
+}
+.debate_rooms {
+    font-size: 14px;
+    background-color: white;
+    width: 200px;
+    height: 50px;
+    list-style: none;
+}
+.ext_width {
+    width: 500px;
+}
+.debate_room_info {
+    align-items: center;
+    background-color: white;
+    border: 1px solid #8E8D8A;
+    width: 600px;
+    height: 220px;
+    padding: 22px;
+    margin-left: 180px;
 }
 .close:hover,
 .close:focus {
@@ -21,7 +39,26 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+.close2:hover,
+.close2:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 .PopUp {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    /*padding-top: 100px;*/ /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    float: center;
+}
+.PopUp2 {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -235,7 +272,7 @@ body {
     color: chocolate;
     transition: .6s ease-out;
     border: 1px solid #8E8D8A;
-    width: 450px;
+    width: 350px;
     height: 42px;
     font-size: 16px;
     letter-spacing: 4px;
@@ -262,6 +299,22 @@ body {
     margin-left: 24px;
     font-size: 16px;
     letter-spacing: 4px;
+}
+.button_ {
+    background-color: coral;
+    transition: all 1s ease-in;
+    border: none;
+    color: black;
+    height: 35px;
+    width: 450px;
+    margin-left: 64px;
+}
+.button_:hover {
+    letter-spacing: 6px;
+    border: 1px solid blueviolet;
+    background-color:white;
+    color: black;
+    transition: all .6s ease-in;
 }
 .Button:hover {
     letter-spacing: 8px;
